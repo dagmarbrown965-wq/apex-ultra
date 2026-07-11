@@ -134,6 +134,7 @@ def run_live(
     keeps prior behavior identical.
     """
     import time as _time
+    import json as _json
 
     if os.environ.get("LIVE_TRADING", "false").strip().lower() in (
             "1", "true", "yes", "on"):
@@ -184,6 +185,7 @@ def run_live(
     stopped_by = "max_signals"
 
     feed.connect()
+    start_ts = _time.time()
     try:
         while signals_emitted < max_signals:
             if max_polls and polls >= max_polls:
@@ -227,6 +229,7 @@ def run_live(
     finally:
         feed.disconnect()
 
+    end_ts = _time.time()
     summary = {
         "session": session_id,
         "output_path": output_path,
@@ -239,7 +242,20 @@ def run_live(
         "signals_emitted": signals_emitted,
         "emit_failures": emit_failures,
         "live_orders_sent": 0,
+        "start_ts": start_ts,
+        "end_ts": end_ts,
+        "duration_s": round(end_ts - start_ts, 3),
+        "strategy": strategy.name,
+        "symbol": symbol,
+        "poll_interval": poll_interval,
+        "max_signals": max_signals,
+        "max_polls": max_polls,
     }
+    summary_path = os.path.join(
+        os.path.dirname(output_path),
+        "session_summary_" + os.path.splitext(session_id)[0] + ".json")
+    with open(summary_path, "w") as f:
+        _json.dump(summary, f, indent=2)
     print()
     print("-" * 64)
     print("SESSION SUMMARY")
@@ -247,6 +263,7 @@ def run_live(
         print(f"  {k:16s}: {v}")
     print("-" * 64)
     print("Live orders sent : 0 (no execution code path exists in this loop)")
+    print(f"Summary file     : {summary_path}")
     print("Next (CP4, manual): py -m testing.shadow.signal_bridge_check "
           f"--journal {output_path}")
     return summary
