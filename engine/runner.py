@@ -24,6 +24,11 @@ loop. Governed by docs/PHASE_43_BOUNDARY_AGREEMENT.md. The live loop:
   - is bounded: --max-signals (default 50) or Ctrl+C, whichever first;
   - sends NO orders. There is no code path to any execution surface here.
 
+Phase 42.1 addition (opt-in, --strategy): the live loop can select which
+strategy is the producer. Default remains reference_ma, so the default
+invocation is unchanged. Governed by docs/PHASE_42_1_BOUNDARY_AGREEMENT.md.
+run_once is UNTOUCHED and always uses ReferenceMA (42.0C regression path).
+
 Imports nothing from any broker or execution module at module level. The
 default invocation `py -m engine.runner` behaves exactly as it did in 42.0B.
 """
@@ -36,6 +41,7 @@ from engine.emit.jsonl_writer import JsonlEmitter
 from engine.feed.snapshot import CapturedSnapshotFeed
 from engine.regime.simple import SimpleRegime
 from engine.risk.descriptive_bracket import DescriptiveBracket
+from engine.strategy.ema_cross import EmaCross
 from engine.strategy.reference_ma import ReferenceMA
 
 # Default paths, resolved relative to this file so the runner works regardless
@@ -44,6 +50,14 @@ _ENGINE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_SNAPSHOT = os.path.join(_ENGINE_DIR, "output", "sample_snapshot.json")
 DEFAULT_OUTPUT = os.path.join(_ENGINE_DIR, "output", "live_signals.jsonl")
 OUTPUT_DIR = os.path.join(_ENGINE_DIR, "output")
+
+# Phase 42.1: named strategy classes selectable in live mode. run_once does
+# NOT consult this table; the snapshot/regression path is pinned to
+# ReferenceMA and is byte-identical to 42.0B.
+STRATEGY_CLASSES = {
+    "reference_ma": ReferenceMA,
+    "ema_cross": EmaCross,
+}
 
 
 def run_once(
@@ -109,18 +123,26 @@ def run_live(
     max_signals: int = 50,
     poll_interval: float = 1.0,
     max_polls: int = 0,
+    strategy_name: str = "reference_ma",
 ) -> dict:
     """Bounded live observation loop. Returns a summary dict (also printed).
 
     feed=None builds a real LiveReadonlyFeed from DERIV_API_TOKEN /
     DERIV_APP_ID env vars (network). Tests inject a fake-adapter feed.
     max_polls=0 means unbounded polls (stop on max_signals or Ctrl+C).
+    strategy_name selects the producer (Phase 42.1); default reference_ma
+    keeps prior behavior identical.
     """
     import time as _time
 
     if os.environ.get("LIVE_TRADING", "false").strip().lower() in (
             "1", "true", "yes", "on"):
         raise SystemExit("BLOCKED: LIVE_TRADING is enabled; refusing to run.")
+
+    if strategy_name not in STRATEGY_CLASSES:
+        raise SystemExit(
+            f"BLOCKED: unknown strategy '{strategy_name}'. "
+            f"Known: {', '.join(sorted(STRATEGY_CLASSES))}")
 
     if feed is None:
         from engine.feed.live_readonly import LiveReadonlyFeed
@@ -137,19 +159,22 @@ def run_live(
         output_path = next_session_path()
     session_id = os.path.basename(output_path)
 
-    strategy = ReferenceMA()
+    strategy = STRATEGY_CLASSES[strategy_name]()
     regime_detector = SimpleRegime()
     risk = DescriptiveBracket()
     emitter = JsonlEmitter(output_path)
 
     print("=" * 64)
-    print("PHASE 43 - LIVE OBSERVATION (read-only; placeholder strategy)")
+    print("LIVE OBSERVATION (read-only)")
     print("=" * 64)
     print(f"session : {session_id}")
     print(f"symbol  : {symbol}")
+    print(f"strategy: {strategy.name}")
     print(f"bound   : {max_signals} signals or Ctrl+C, whichever first")
-    print("NOTE    : ReferenceMA is a PLACEHOLDER. This validates PLUMBING,")
-    print("          not a strategy. Not part of any observation window.")
+    if strategy.name == "reference_ma":
+        print("NOTE    : ReferenceMA is a PLACEHOLDER. This validates "
+              "PLUMBING,")
+        print("          not a strategy. Not part of any observation window.")
     print()
 
     signals_emitted = 0
@@ -236,11 +261,14 @@ if __name__ == "__main__":
     parser.add_argument("--max-signals", type=int, default=50)
     parser.add_argument("--poll-interval", type=float, default=1.0)
     parser.add_argument("--symbol", default="R_100")
+    parser.add_argument("--strategy", choices=sorted(STRATEGY_CLASSES),
+                        default="reference_ma")
     args = parser.parse_args()
 
     if args.mode == "live":
         run_live(symbol=args.symbol, max_signals=args.max_signals,
-                 poll_interval=args.poll_interval)
+                 poll_interval=args.poll_interval,
+                 strategy_name=args.strategy)
     else:
         result = run_once()
         if result is None:
