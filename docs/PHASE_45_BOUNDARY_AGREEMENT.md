@@ -1,4 +1,4 @@
-# PHASE 45 BOUNDARY AGREEMENT (v0.1 — DRAFT, not locked)
+# PHASE 45 BOUNDARY AGREEMENT (v0.1 — LOCKED 2026-07-24)
 
 _Status: DRAFT until committed to docs/ on main. Level 2 document under
 the AI Company Constitution v1.1. More restrictive than, and consistent
@@ -127,3 +127,4 @@ fills. Those are separate questions for separate phases.
   >= 38%, no re-tuning permitted on a negative result. Numbers
   recommended by the advisor and accepted by the CEO before any data
   was collected.
+
