@@ -1,0 +1,21 @@
+{
+  "session": "live_signals_2026-07-24_session002.jsonl",
+  "output_path": "C:\\Users\\dagma\\Downloads\\APEX_ULTRA\\apex_ultra\\engine\\output\\live_signals_2026-07-24_session002.jsonl",
+  "stopped_by": "manual_stop",
+  "polls": 1815,
+  "ticks_seen": 1815,
+  "ticks_rejected": 0,
+  "ticks_duplicate": 736,
+  "buffer_depth": 25,
+  "signals_emitted": 73,
+  "emit_failures": 0,
+  "live_orders_sent": 0,
+  "start_ts": 1784902095.9568534,
+  "end_ts": 1784904258.797318,
+  "duration_s": 2162.84,
+  "strategy": "ema_cross",
+  "symbol": "R_100",
+  "poll_interval": 1.0,
+  "max_signals": 500,
+  "max_polls": 0
+}
