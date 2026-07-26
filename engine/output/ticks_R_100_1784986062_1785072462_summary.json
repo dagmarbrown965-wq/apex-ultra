@@ -1,0 +1,16 @@
+{
+  "symbol": "R_100",
+  "data_path": "engine\\output\\ticks_R_100_1784986062_1785072462.jsonl",
+  "tick_count": 43201,
+  "first_epoch": 1784986062,
+  "last_epoch": 1785072462,
+  "span_seconds": 86400,
+  "span_days": 1.0,
+  "requests_made": 45,
+  "stop_reason": "history_exhausted_no_progress",
+  "expected_tick_seconds": 2,
+  "largest_gap_seconds": 2,
+  "largest_gap_after_epoch": 1784986062,
+  "gaps_over_expected_count": 0,
+  "ticks_per_request": 1000
+}
