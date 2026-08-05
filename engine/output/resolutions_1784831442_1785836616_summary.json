@@ -1,0 +1,19 @@
+{
+  "signal_source": "engine\\output\\replay_signals_1784831442_1785836616.jsonl",
+  "signals_examined": 27187,
+  "signals_not_in_tick_series": 0,
+  "resolutions_written": 27187,
+  "resolved": 25428,
+  "wins": 8081,
+  "losses": 17347,
+  "unresolved": 1759,
+  "unresolved_fraction": 0.0647,
+  "unresolved_exceeds_threshold": false,
+  "same_tick_ambiguous_count": 0,
+  "win_rate": 0.3178,
+  "median_seconds_to_resolve": 5037.0,
+  "mean_seconds_to_resolve": 6823.5,
+  "contiguous_block_count": 10,
+  "resolution_path": "engine\\output\\resolutions_1784831442_1785836616.jsonl",
+  "note": "No costs applied at this stage. The 0.2-point spread is applied in W45.3. Win rate here is pre-cost and carries no pass/fail meaning on its own."
+}
