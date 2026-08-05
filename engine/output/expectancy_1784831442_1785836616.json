@@ -1,0 +1,46 @@
+{
+  "resolution_source": "engine\\output\\resolutions_1784831442_1785836616.jsonl",
+  "cost_model": {
+    "spread_points": 0.2,
+    "applied": "round-trip, as pct of each trade's own entry price",
+    "win_gross_pct": 2.0,
+    "loss_gross_pct": -1.0,
+    "break_even_win_rate_after_costs": 0.345
+  },
+  "primary_every_signal": {
+    "trades": 25428,
+    "wins": 8081,
+    "losses": 17347,
+    "win_rate": 0.3178,
+    "expectancy_pct_per_trade": -0.0813,
+    "total_return_pct": -2067.7,
+    "naive_ci95_low": 0.3121,
+    "naive_ci95_high": 0.3235,
+    "blocks_used": 10,
+    "block_mean_win_rate": 0.2932,
+    "block_ci95_low": 0.2419,
+    "block_ci95_high": 0.3446
+  },
+  "secondary_one_at_a_time": {
+    "trades": 143,
+    "wins": 43,
+    "losses": 100,
+    "win_rate": 0.3007,
+    "expectancy_pct_per_trade": -0.1327,
+    "total_return_pct": -18.98,
+    "naive_ci95_low": 0.2255,
+    "naive_ci95_high": 0.3759,
+    "blocks_used": 10,
+    "block_mean_win_rate": 0.2467,
+    "block_ci95_low": 0.1349,
+    "block_ci95_high": 0.3585
+  },
+  "pre_committed_criteria": {
+    "required_resolved_signals": 1000,
+    "required_win_rate": 0.38,
+    "resolved_signals_met": true,
+    "win_rate_met": false,
+    "verdict": "FAIL"
+  },
+  "note": "Criteria were locked before any data was collected. Per the agreement, a negative result is accepted as a finding; re-tuning EMA periods, bracket ratios, symbol, or post-hoc signal filters is forbidden."
+}
