@@ -1,0 +1,23 @@
+{
+  "symbol": "frxEURUSD",
+  "granularity": 900,
+  "data_path": "engine\\output\\candles_frxEURUSD_900_1754473235_1786008600.jsonl",
+  "candle_count": 24257,
+  "first_epoch": 1754473235,
+  "last_epoch": 1786008600,
+  "span_seconds": 31535365,
+  "span_days": 364.993,
+  "requests_made": 37,
+  "empty_responses": 0,
+  "stop_reason": "history_boundary_substitution",
+  "substitution_note": {
+    "requested_end": 1754473234,
+    "returned_newest": 1786008600,
+    "excess_seconds": 31535366
+  },
+  "largest_gap_seconds": 184500,
+  "largest_gap_after_epoch": 1754685900,
+  "gaps_over_granularity_count": 55,
+  "candles_per_request": 1000,
+  "note": "Gaps larger than the granularity are expected at weekends (forex closes Fri evening to Sun evening) and are reported, never smoothed or backfilled."
+}
