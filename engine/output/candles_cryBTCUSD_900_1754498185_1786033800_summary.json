@@ -1,0 +1,23 @@
+{
+  "symbol": "cryBTCUSD",
+  "granularity": 900,
+  "data_path": "engine\\output\\candles_cryBTCUSD_900_1754498185_1786033800.jsonl",
+  "candle_count": 35023,
+  "first_epoch": 1754498185,
+  "last_epoch": 1786033800,
+  "span_seconds": 31535615,
+  "span_days": 364.996,
+  "requests_made": 37,
+  "empty_responses": 0,
+  "stop_reason": "history_boundary_substitution",
+  "substitution_note": {
+    "requested_end": 1754498184,
+    "returned_newest": 1786033800,
+    "excess_seconds": 31535616
+  },
+  "largest_gap_seconds": 6300,
+  "largest_gap_after_epoch": 1764432000,
+  "gaps_over_granularity_count": 5,
+  "candles_per_request": 1000,
+  "note": "For forex, gaps larger than the granularity are expected at weekends and are reported, never smoothed or backfilled. For crypto (24/7) any such gap is a data anomaly."
+}

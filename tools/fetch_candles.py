@@ -1,8 +1,14 @@
-"""APEX ULTRA - W46.0: EUR/USD candle history fetch (Phase 46, READ-ONLY).
+"""APEX ULTRA - W46.0: candle history fetch (READ-ONLY).
 
 Pages `ticks_history` backwards in candle mode to assemble a 15-minute OHLC
-series for offline evaluation. Governed by
-docs/PHASE_46_BOUNDARY_AGREEMENT.md.
+series for offline evaluation.
+
+Originally built for Phase 46 (frxEURUSD,
+docs/PHASE_46_BOUNDARY_AGREEMENT.md). Parameterised by symbol at W47.1 for
+Phase 47 (cryBTCUSD, docs/PHASE_47_BOUNDARY_AGREEMENT.md). The default
+symbol remains frxEURUSD so every Phase 46 invocation behaves exactly as it
+did when that phase's artefacts were produced. NO validation or pagination
+logic was changed by that patch.
 
 Verified facts this tool relies on (probed 2026-08-05, not assumed):
   - a candles response arrives in ONE frame; collect must be 1
@@ -21,9 +27,9 @@ Verified facts this tool relies on (probed 2026-08-05, not assumed):
 Sends no execution ops. Writes only under engine/output/.
 
 Usage (from the repo root, credentials already in the environment):
-    py -m tools.fetch_candles
-    py -m tools.fetch_candles --days 300
-    py -m tools.fetch_candles --days 3      (smoke test)
+    py -m tools.fetch_candles                          (frxEURUSD, 300d)
+    py -m tools.fetch_candles --days 600
+    py -m tools.fetch_candles --symbol cryBTCUSD --days 400
 """
 from __future__ import annotations
 
@@ -36,7 +42,7 @@ from pathlib import Path
 
 from infrastructure.broker.deriv.rest_transport import DerivRestOtpTransport
 
-SYMBOL = "frxEURUSD"
+DEFAULT_SYMBOL = "frxEURUSD"      # argparse default only; never read inside fetch()
 GRANULARITY = 900                 # 15-minute bars
 CANDLES_PER_REQUEST = 1000        # observed server cap
 SLEEP_BETWEEN_REQUESTS = 1.0
@@ -68,7 +74,7 @@ def _parse_candles(frames: list) -> tuple:
     return [], False
 
 
-def fetch(days: float) -> int:
+def fetch(days: float, symbol: str) -> int:
     if os.environ.get("LIVE_TRADING", "false").strip().lower() in (
             "1", "true", "yes", "on"):
         print("BLOCKED: LIVE_TRADING is enabled; refusing to run.")
@@ -92,9 +98,9 @@ def fetch(days: float) -> int:
     substitution_note = None
 
     print("=" * 64)
-    print("W46.0 - EUR/USD CANDLE HISTORY FETCH (read-only)")
+    print("W46.0 - CANDLE HISTORY FETCH (read-only)")
     print("=" * 64)
-    print(f"symbol        : {SYMBOL}")
+    print(f"symbol        : {symbol}")
     print(f"granularity   : {GRANULARITY}s (15-minute bars)")
     print(f"target span   : {days} days")
     print(f"per request   : {CANDLES_PER_REQUEST} candles")
@@ -116,7 +122,7 @@ def fetch(days: float) -> int:
 
         while requests_made < MAX_REQUESTS:
             res = t._ws_roundtrip(
-                {"ticks_history": SYMBOL,
+                {"ticks_history": symbol,
                  "count": CANDLES_PER_REQUEST,
                  "end": end_param,
                  "style": "candles",
@@ -216,7 +222,7 @@ def fetch(days: float) -> int:
             gap_at = epochs[i - 1]
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    stem = f"candles_{SYMBOL}_{GRANULARITY}_{epochs[0]}_{epochs[-1]}"
+    stem = f"candles_{symbol}_{GRANULARITY}_{epochs[0]}_{epochs[-1]}"
     data_path = OUTPUT_DIR / f"{stem}.jsonl"
     summary_path = OUTPUT_DIR / f"{stem}_summary.json"
 
@@ -227,7 +233,7 @@ def fetch(days: float) -> int:
 
     span_seconds = epochs[-1] - epochs[0]
     summary = {
-        "symbol": SYMBOL,
+        "symbol": symbol,
         "granularity": GRANULARITY,
         "data_path": str(data_path),
         "candle_count": len(ordered),
@@ -243,9 +249,9 @@ def fetch(days: float) -> int:
         "largest_gap_after_epoch": gap_at,
         "gaps_over_granularity_count": gaps_over_expected,
         "candles_per_request": CANDLES_PER_REQUEST,
-        "note": ("Gaps larger than the granularity are expected at weekends "
-                 "(forex closes Fri evening to Sun evening) and are reported, "
-                 "never smoothed or backfilled."),
+        "note": ("For forex, gaps larger than the granularity are expected "
+                 "at weekends and are reported, never smoothed or backfilled. "
+                 "For crypto (24/7) any such gap is a data anomaly."),
     }
     with open(summary_path, "w") as f:
         json.dump(summary, f, indent=2)
@@ -265,11 +271,13 @@ def fetch(days: float) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description="Fetch EUR/USD 15-minute candle history (read-only).")
+        description="Fetch 15-minute candle history from Deriv (read-only).")
     ap.add_argument("--days", type=float, default=300.0,
-                    help="target span in days (default 300, per the agreement)")
+                    help="target span in days (default 300)")
+    ap.add_argument("--symbol", type=str, default=DEFAULT_SYMBOL,
+                    help=f"Deriv symbol (default {DEFAULT_SYMBOL})")
     args = ap.parse_args()
-    return fetch(args.days)
+    return fetch(args.days, args.symbol)
 
 
 if __name__ == "__main__":
