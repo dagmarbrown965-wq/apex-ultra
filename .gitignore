@@ -4,3 +4,9 @@ __pycache__/
 .env
 
 engine/output/ticks_*.jsonl
+
+engine/output/candles_*.jsonl
+engine/output/replay_candles_*.jsonl
+engine/output/resolutions_candles*.jsonl
+engine/output/replay_signals_*.jsonl
+engine/output/resolutions_1*.jsonl
