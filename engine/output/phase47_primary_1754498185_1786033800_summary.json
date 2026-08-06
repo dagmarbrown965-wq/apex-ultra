@@ -1,0 +1,42 @@
+{
+  "phase": "47",
+  "work_item": "W47.2",
+  "symbol": "cryBTCUSD",
+  "granularity": 900,
+  "preregistration_match": true,
+  "deviation_fields": [],
+  "parameters": {
+    "atr_period": 14,
+    "lookback": 96,
+    "threshold": 0.2,
+    "stop_atr": 1.5,
+    "trail_atr": 3.0,
+    "trail_activate_r": 1.0,
+    "expiry_bars": 4
+  },
+  "preregistered_defaults": {
+    "atr_period": 14,
+    "lookback": 96,
+    "threshold": 0.2,
+    "stop_atr": 1.5,
+    "trail_atr": 3.0,
+    "trail_activate_r": 1.0,
+    "expiry_bars": 4
+  },
+  "candle_file": "engine\\output\\candles_cryBTCUSD_900_1754498185_1786033800.jsonl",
+  "candle_sha256": "e27f81cc09998c626a775b42a8d4dd48c86b5811ffdeeadb4698a19880c6819c",
+  "trades_sha256": "d9445e0db7aedcca6606c5c8d3286d2bedf25532fb41d8331626df0e177d9c29",
+  "total_bars": 35023,
+  "warmup_bars": 109,
+  "evaluable_bars": 34914,
+  "first_epoch": 1754498185,
+  "last_epoch": 1786033800,
+  "episodes_started": 711,
+  "episodes_consumed": 559,
+  "episodes_expired": 152,
+  "ignored_signals": 165,
+  "trades_closed": 394,
+  "unresolved_trade": null,
+  "execution_model": "close-only, no intrabar fills",
+  "known_bias": "Close-only stop evaluation lets a bar that pierces the stop intrabar but closes back inside survive. A resting stop order would have filled. This likely biases measured expectancy UPWARD versus live execution and is NOT neutral conservatism."
+}
