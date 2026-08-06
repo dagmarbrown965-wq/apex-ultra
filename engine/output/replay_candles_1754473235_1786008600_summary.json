@@ -1,0 +1,413 @@
+{
+  "symbol": "frxEURUSD",
+  "granularity": 900,
+  "source_files": [
+    "engine\\output\\candles_frxEURUSD_900_1754473235_1786008600.jsonl"
+  ],
+  "candles": 24257,
+  "first_epoch": 1754473235,
+  "last_epoch": 1786008600,
+  "span_days": 364.993,
+  "contiguous_block_count": 56,
+  "warmup_excluded_candles": 1064,
+  "signals_generated": 1323,
+  "signals_per_1000_candles": 54.5,
+  "bracket_stop_pct": 0.002,
+  "bracket_target_pct": 0.004,
+  "strategy_state": "fresh EmaCross instance per contiguous block",
+  "signal_path": "engine\\output\\replay_candles_1754473235_1786008600.jsonl",
+  "per_block": [
+    {
+      "block_index": 0,
+      "start_epoch": 1754473235,
+      "end_epoch": 1754685900,
+      "candles": 238,
+      "signals": 13
+    },
+    {
+      "block_index": 1,
+      "start_epoch": 1754870400,
+      "end_epoch": 1755290700,
+      "candles": 469,
+      "signals": 23
+    },
+    {
+      "block_index": 2,
+      "start_epoch": 1755475200,
+      "end_epoch": 1755895500,
+      "candles": 469,
+      "signals": 21
+    },
+    {
+      "block_index": 3,
+      "start_epoch": 1756080000,
+      "end_epoch": 1756500300,
+      "candles": 468,
+      "signals": 21
+    },
+    {
+      "block_index": 4,
+      "start_epoch": 1756684800,
+      "end_epoch": 1757105100,
+      "candles": 468,
+      "signals": 23
+    },
+    {
+      "block_index": 5,
+      "start_epoch": 1757289600,
+      "end_epoch": 1757709900,
+      "candles": 469,
+      "signals": 28
+    },
+    {
+      "block_index": 6,
+      "start_epoch": 1757894400,
+      "end_epoch": 1758259800,
+      "candles": 407,
+      "signals": 25
+    },
+    {
+      "block_index": 7,
+      "start_epoch": 1758261600,
+      "end_epoch": 1758314700,
+      "candles": 61,
+      "signals": 4
+    },
+    {
+      "block_index": 8,
+      "start_epoch": 1758499200,
+      "end_epoch": 1758919500,
+      "candles": 468,
+      "signals": 23
+    },
+    {
+      "block_index": 9,
+      "start_epoch": 1759104000,
+      "end_epoch": 1759524300,
+      "candles": 469,
+      "signals": 32
+    },
+    {
+      "block_index": 10,
+      "start_epoch": 1759708800,
+      "end_epoch": 1760129100,
+      "candles": 469,
+      "signals": 16
+    },
+    {
+      "block_index": 11,
+      "start_epoch": 1760313600,
+      "end_epoch": 1760733900,
+      "candles": 468,
+      "signals": 21
+    },
+    {
+      "block_index": 12,
+      "start_epoch": 1760918400,
+      "end_epoch": 1761338700,
+      "candles": 469,
+      "signals": 22
+    },
+    {
+      "block_index": 13,
+      "start_epoch": 1761523200,
+      "end_epoch": 1761943500,
+      "candles": 469,
+      "signals": 21
+    },
+    {
+      "block_index": 14,
+      "start_epoch": 1762128000,
+      "end_epoch": 1762548300,
+      "candles": 468,
+      "signals": 17
+    },
+    {
+      "block_index": 15,
+      "start_epoch": 1762732800,
+      "end_epoch": 1763153100,
+      "candles": 469,
+      "signals": 28
+    },
+    {
+      "block_index": 16,
+      "start_epoch": 1763337600,
+      "end_epoch": 1763757900,
+      "candles": 469,
+      "signals": 37
+    },
+    {
+      "block_index": 17,
+      "start_epoch": 1763942400,
+      "end_epoch": 1764362700,
+      "candles": 468,
+      "signals": 28
+    },
+    {
+      "block_index": 18,
+      "start_epoch": 1764547200,
+      "end_epoch": 1764967500,
+      "candles": 469,
+      "signals": 18
+    },
+    {
+      "block_index": 19,
+      "start_epoch": 1765152000,
+      "end_epoch": 1765572300,
+      "candles": 469,
+      "signals": 22
+    },
+    {
+      "block_index": 20,
+      "start_epoch": 1765756800,
+      "end_epoch": 1766177100,
+      "candles": 468,
+      "signals": 26
+    },
+    {
+      "block_index": 21,
+      "start_epoch": 1766361600,
+      "end_epoch": 1766613600,
+      "candles": 282,
+      "signals": 16
+    },
+    {
+      "block_index": 22,
+      "start_epoch": 1766707200,
+      "end_epoch": 1766781900,
+      "candles": 84,
+      "signals": 5
+    },
+    {
+      "block_index": 23,
+      "start_epoch": 1766966400,
+      "end_epoch": 1767218400,
+      "candles": 281,
+      "signals": 9
+    },
+    {
+      "block_index": 24,
+      "start_epoch": 1767312000,
+      "end_epoch": 1767386700,
+      "candles": 84,
+      "signals": 3
+    },
+    {
+      "block_index": 25,
+      "start_epoch": 1767571200,
+      "end_epoch": 1767991500,
+      "candles": 468,
+      "signals": 33
+    },
+    {
+      "block_index": 26,
+      "start_epoch": 1768176000,
+      "end_epoch": 1768596300,
+      "candles": 469,
+      "signals": 25
+    },
+    {
+      "block_index": 27,
+      "start_epoch": 1768780800,
+      "end_epoch": 1769201100,
+      "candles": 469,
+      "signals": 26
+    },
+    {
+      "block_index": 28,
+      "start_epoch": 1769385600,
+      "end_epoch": 1769805900,
+      "candles": 468,
+      "signals": 29
+    },
+    {
+      "block_index": 29,
+      "start_epoch": 1769990400,
+      "end_epoch": 1770410700,
+      "candles": 468,
+      "signals": 27
+    },
+    {
+      "block_index": 30,
+      "start_epoch": 1770595200,
+      "end_epoch": 1771015500,
+      "candles": 469,
+      "signals": 35
+    },
+    {
+      "block_index": 31,
+      "start_epoch": 1771200000,
+      "end_epoch": 1771620300,
+      "candles": 469,
+      "signals": 24
+    },
+    {
+      "block_index": 32,
+      "start_epoch": 1771804800,
+      "end_epoch": 1772225100,
+      "candles": 468,
+      "signals": 25
+    },
+    {
+      "block_index": 33,
+      "start_epoch": 1772409600,
+      "end_epoch": 1772829900,
+      "candles": 469,
+      "signals": 22
+    },
+    {
+      "block_index": 34,
+      "start_epoch": 1773014400,
+      "end_epoch": 1773434700,
+      "candles": 469,
+      "signals": 19
+    },
+    {
+      "block_index": 35,
+      "start_epoch": 1773619200,
+      "end_epoch": 1774039500,
+      "candles": 468,
+      "signals": 19
+    },
+    {
+      "block_index": 36,
+      "start_epoch": 1774224000,
+      "end_epoch": 1774644300,
+      "candles": 469,
+      "signals": 26
+    },
+    {
+      "block_index": 37,
+      "start_epoch": 1774828800,
+      "end_epoch": 1775249100,
+      "candles": 469,
+      "signals": 27
+    },
+    {
+      "block_index": 38,
+      "start_epoch": 1775433600,
+      "end_epoch": 1775853900,
+      "candles": 468,
+      "signals": 26
+    },
+    {
+      "block_index": 39,
+      "start_epoch": 1776038400,
+      "end_epoch": 1776458700,
+      "candles": 469,
+      "signals": 33
+    },
+    {
+      "block_index": 40,
+      "start_epoch": 1776643200,
+      "end_epoch": 1777063500,
+      "candles": 469,
+      "signals": 34
+    },
+    {
+      "block_index": 41,
+      "start_epoch": 1777248000,
+      "end_epoch": 1777668300,
+      "candles": 468,
+      "signals": 21
+    },
+    {
+      "block_index": 42,
+      "start_epoch": 1777852800,
+      "end_epoch": 1778273100,
+      "candles": 469,
+      "signals": 28
+    },
+    {
+      "block_index": 43,
+      "start_epoch": 1778457600,
+      "end_epoch": 1778877900,
+      "candles": 469,
+      "signals": 20
+    },
+    {
+      "block_index": 44,
+      "start_epoch": 1779062400,
+      "end_epoch": 1779482700,
+      "candles": 468,
+      "signals": 37
+    },
+    {
+      "block_index": 45,
+      "start_epoch": 1779667200,
+      "end_epoch": 1780087500,
+      "candles": 469,
+      "signals": 33
+    },
+    {
+      "block_index": 46,
+      "start_epoch": 1780272000,
+      "end_epoch": 1780692300,
+      "candles": 469,
+      "signals": 23
+    },
+    {
+      "block_index": 47,
+      "start_epoch": 1780876800,
+      "end_epoch": 1781297100,
+      "candles": 468,
+      "signals": 29
+    },
+    {
+      "block_index": 48,
+      "start_epoch": 1781481600,
+      "end_epoch": 1781901900,
+      "candles": 469,
+      "signals": 26
+    },
+    {
+      "block_index": 49,
+      "start_epoch": 1782086400,
+      "end_epoch": 1782506700,
+      "candles": 469,
+      "signals": 30
+    },
+    {
+      "block_index": 50,
+      "start_epoch": 1782691200,
+      "end_epoch": 1783111500,
+      "candles": 468,
+      "signals": 20
+    },
+    {
+      "block_index": 51,
+      "start_epoch": 1783296000,
+      "end_epoch": 1783716300,
+      "candles": 469,
+      "signals": 22
+    },
+    {
+      "block_index": 52,
+      "start_epoch": 1783900800,
+      "end_epoch": 1784321100,
+      "candles": 469,
+      "signals": 20
+    },
+    {
+      "block_index": 53,
+      "start_epoch": 1784505600,
+      "end_epoch": 1784925900,
+      "candles": 468,
+      "signals": 29
+    },
+    {
+      "block_index": 54,
+      "start_epoch": 1785110400,
+      "end_epoch": 1785530700,
+      "candles": 468,
+      "signals": 23
+    },
+    {
+      "block_index": 55,
+      "start_epoch": 1785715200,
+      "end_epoch": 1786008600,
+      "candles": 327,
+      "signals": 30
+    }
+  ]
+}
