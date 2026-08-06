@@ -1,0 +1,23 @@
+{
+  "symbol": "frxEURUSD",
+  "granularity": 900,
+  "signal_source": "engine\\output\\replay_candles_1754473235_1786008600.jsonl",
+  "signals_examined": 1323,
+  "signals_not_in_series": 0,
+  "resolutions_written": 1323,
+  "resolved": 1087,
+  "wins": 351,
+  "losses": 736,
+  "unresolved": 236,
+  "unresolved_fraction": 0.1784,
+  "unresolved_exceeds_threshold": true,
+  "same_bar_ambiguous_count": 0,
+  "same_bar_ambiguous_fraction": 0.0,
+  "win_rate_pre_cost": 0.3229,
+  "median_bars_to_resolve": 45,
+  "mean_bars_to_resolve": 62.6,
+  "median_hours_to_resolve": 11.25,
+  "contiguous_block_count": 56,
+  "resolution_path": "engine\\output\\resolutions_candles_1754473235_1786008600.jsonl",
+  "note": "No costs applied at this stage; the 0.01% spread is applied in W46.3. Ambiguous bars (range spanning both barriers) are recorded as LOSS by the pre-committed pessimistic rule."
+}
