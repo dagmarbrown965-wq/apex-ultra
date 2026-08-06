@@ -1,0 +1,62 @@
+{
+  "resolution_source": "engine\\output\\resolutions_candles_v2_1754473235_1786008600.jsonl",
+  "cost_model": {
+    "spread_pct_round_trip": 0.01,
+    "win_gross_pct": 0.4,
+    "loss_gross_pct": -0.2,
+    "win_net_pct": 0.39,
+    "loss_net_pct": -0.21,
+    "break_even_win_rate": 0.35
+  },
+  "independent_windows": 672.2,
+  "gap_through_count": 33,
+  "gap_through_fraction": 0.0251,
+  "primary_every_signal": {
+    "trades": 1314,
+    "wins": 449,
+    "losses": 865,
+    "win_rate": 0.3417,
+    "expectancy_pct_per_trade": -0.005,
+    "total_return_pct": -6.54,
+    "naive_ci95_low": 0.3161,
+    "naive_ci95_high": 0.3673,
+    "blocks_used": 56,
+    "block_mean_win_rate": 0.3461,
+    "block_ci95_low": 0.3183,
+    "block_ci95_high": 0.3738
+  },
+  "secondary_one_at_a_time": {
+    "trades": 255,
+    "wins": 86,
+    "losses": 169,
+    "win_rate": 0.3373,
+    "expectancy_pct_per_trade": -0.0076,
+    "total_return_pct": -1.95,
+    "naive_ci95_low": 0.2792,
+    "naive_ci95_high": 0.3953,
+    "blocks_used": 55,
+    "block_mean_win_rate": 0.3503,
+    "block_ci95_low": 0.2912,
+    "block_ci95_high": 0.4094
+  },
+  "pre_committed_criteria": {
+    "required_resolved_signals": 1000,
+    "required_independent_windows": 150,
+    "required_win_rate": 0.38,
+    "resolved_signals_met": true,
+    "independent_windows_met": true,
+    "win_rate_met": false,
+    "verdict": "FAIL"
+  },
+  "phase_45_reference": {
+    "instrument": "R_100 (synthetic)",
+    "win_rate": 0.3178,
+    "break_even": 0.345,
+    "verdict": "FAIL"
+  },
+  "disclosures": [
+    "Gap-throughs are recorded at barrier prices; real fills on gapped stops are worse than -0.2%, so measured expectancy is OPTIMISTIC relative to live trading.",
+    "Spread assumed constant at 0.01%; real spreads widen during news and illiquid sessions.",
+    "Cross-weekend resolution assumes a position can be held through the close, which incurs swap/rollover costs not modelled here."
+  ]
+}
