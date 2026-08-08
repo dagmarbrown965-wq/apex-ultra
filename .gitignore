@@ -10,3 +10,8 @@ engine/output/replay_candles_*.jsonl
 engine/output/resolutions_candles*.jsonl
 engine/output/replay_signals_*.jsonl
 engine/output/resolutions_1*.jsonl
+
+# oauth_capture writes a full token to disk - never commit its output
+*token*.txt
+*.token
+demo_token*
