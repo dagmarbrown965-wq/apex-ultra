@@ -1,0 +1,1040 @@
+{
+  "stage": "W48.0a independence screen",
+  "agreement": "docs/PHASE_48_BOUNDARY_AGREEMENT.md v1.0 + v0.1 + v0.2",
+  "run_complete": true,
+  "aborted": false,
+  "abort_reason": null,
+  "limit_applied": null,
+  "resume_from": null,
+  "granularity": 900,
+  "independence_ceiling": 0.3,
+  "min_matched_returns": 500,
+  "screening_window_end_epoch": 1786008600,
+  "references": {
+    "frxEURUSD": 24257,
+    "cryBTCUSD": 35023
+  },
+  "r_100_note": "exempt per Amendment v0.1 (RNG, tick-only data)",
+  "candidates_evaluated": 41,
+  "results": [
+    {
+      "symbol": "1HZ100V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ10V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ15V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ25V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ30V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ50V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ75V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "1HZ90V",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM1000",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM150N",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM300N",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM50",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM500",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM600",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "BOOM900",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH1000",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH150N",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH300N",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH50",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH500",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH600",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "CRASH900",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "JD10",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "JD100",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "JD25",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "JD50",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "JD75",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "RB100",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "RB200",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "RDBEAR",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "RDBULL",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "R_10",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "R_100",
+      "outcome": "EXCLUDED",
+      "reason": "previously used (Section C.1)"
+    },
+    {
+      "symbol": "R_25",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "R_50",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "R_75",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "WLDAUD",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=baskets)"
+    },
+    {
+      "symbol": "WLDEUR",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=baskets)"
+    },
+    {
+      "symbol": "WLDGBP",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=baskets)"
+    },
+    {
+      "symbol": "WLDUSD",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=baskets)"
+    },
+    {
+      "symbol": "WLDXAU",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=baskets)"
+    },
+    {
+      "symbol": "cryBTCUSD",
+      "outcome": "EXCLUDED",
+      "reason": "previously used (Section C.1)"
+    },
+    {
+      "symbol": "frxEURUSD",
+      "outcome": "EXCLUDED",
+      "reason": "previously used (Section C.1)"
+    },
+    {
+      "symbol": "stpRNG",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "stpRNG2",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "stpRNG3",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "stpRNG4",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "stpRNG5",
+      "outcome": "EXCLUDED",
+      "reason": "synthetic (market=synthetic_index, subgroup=synthetics)"
+    },
+    {
+      "symbol": "OTC_AEX",
+      "market": "indices",
+      "display_name": "Netherlands 25",
+      "bars_fetched": 778,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 763,
+          "r": 0.1388
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 763,
+          "r": 0.2977
+        }
+      },
+      "max_abs_r": 0.2977,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_AS51",
+      "market": "indices",
+      "display_name": "Australia 200",
+      "bars_fetched": 615,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 599,
+          "r": 0.2656
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 599,
+          "r": 0.3731
+        }
+      },
+      "max_abs_r": 0.3731,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "OTC_DJI",
+      "market": "indices",
+      "display_name": "Wall Street 30",
+      "bars_fetched": 814,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 797,
+          "r": 0.2452
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 797,
+          "r": 0.3727
+        }
+      },
+      "max_abs_r": 0.3727,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "OTC_FCHI",
+      "market": "indices",
+      "display_name": "France 40",
+      "bars_fetched": 772,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 757,
+          "r": 0.1846
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 757,
+          "r": 0.2637
+        }
+      },
+      "max_abs_r": 0.2637,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_FTSE",
+      "market": "indices",
+      "display_name": "UK 100",
+      "bars_fetched": 813,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 796,
+          "r": 0.1237
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 796,
+          "r": 0.201
+        }
+      },
+      "max_abs_r": 0.201,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_GDAXI",
+      "market": "indices",
+      "display_name": "Germany 40",
+      "bars_fetched": 777,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 761,
+          "r": 0.2157
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 761,
+          "r": 0.2925
+        }
+      },
+      "max_abs_r": 0.2925,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_HSI",
+      "market": "indices",
+      "display_name": "Hong Kong 50",
+      "bars_fetched": 641,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 585,
+          "r": 0.2139
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 585,
+          "r": 0.1703
+        }
+      },
+      "max_abs_r": 0.2139,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_N225",
+      "market": "indices",
+      "display_name": "Japan 225",
+      "bars_fetched": 686,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 677,
+          "r": 0.1318
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 677,
+          "r": 0.391
+        }
+      },
+      "max_abs_r": 0.391,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "OTC_NDX",
+      "market": "indices",
+      "display_name": "US Tech 100",
+      "bars_fetched": 815,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 798,
+          "r": 0.2586
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 798,
+          "r": 0.5149
+        }
+      },
+      "max_abs_r": 0.5149,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "OTC_SPC",
+      "market": "indices",
+      "display_name": "US 500",
+      "bars_fetched": 814,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 797,
+          "r": 0.2665
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 797,
+          "r": 0.4998
+        }
+      },
+      "max_abs_r": 0.4998,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "OTC_SSMI",
+      "market": "indices",
+      "display_name": "Swiss 20",
+      "bars_fetched": 516,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 501,
+          "r": 0.1011
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 501,
+          "r": 0.073
+        }
+      },
+      "max_abs_r": 0.1011,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "OTC_SX5E",
+      "market": "indices",
+      "display_name": "Euro 50",
+      "bars_fetched": 744,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 729,
+          "r": 0.2492
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 729,
+          "r": 0.3397
+        }
+      },
+      "max_abs_r": 0.3397,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "cryETHUSD",
+      "market": "cryptocurrency",
+      "display_name": "ETH/USD",
+      "bars_fetched": 1000,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.2039
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 999,
+          "r": 0.8686
+        }
+      },
+      "max_abs_r": 0.8686,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxAUDCAD",
+      "market": "forex",
+      "display_name": "AUD/CAD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.4475
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.2786
+        }
+      },
+      "max_abs_r": 0.4475,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxAUDCHF",
+      "market": "forex",
+      "display_name": "AUD/CHF",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.2622
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.1389
+        }
+      },
+      "max_abs_r": 0.2622,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxAUDJPY",
+      "market": "forex",
+      "display_name": "AUD/JPY",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1863
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.1069
+        }
+      },
+      "max_abs_r": 0.1863,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxAUDNZD",
+      "market": "forex",
+      "display_name": "AUD/NZD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.152
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.0539
+        }
+      },
+      "max_abs_r": 0.152,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxAUDUSD",
+      "market": "forex",
+      "display_name": "AUD/USD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.708
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.2989
+        }
+      },
+      "max_abs_r": 0.708,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxEURAUD",
+      "market": "forex",
+      "display_name": "EUR/AUD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.0195
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.254
+        }
+      },
+      "max_abs_r": 0.254,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxEURCAD",
+      "market": "forex",
+      "display_name": "EUR/CAD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.6305
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.0565
+        }
+      },
+      "max_abs_r": 0.6305,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxEURCHF",
+      "market": "forex",
+      "display_name": "EUR/CHF",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.3715
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1124
+        }
+      },
+      "max_abs_r": 0.3715,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxEURGBP",
+      "market": "forex",
+      "display_name": "EUR/GBP",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.2025
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.0238
+        }
+      },
+      "max_abs_r": 0.2025,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxEURJPY",
+      "market": "forex",
+      "display_name": "EUR/JPY",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1907
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.011
+        }
+      },
+      "max_abs_r": 0.1907,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxEURNZD",
+      "market": "forex",
+      "display_name": "EUR/NZD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1178
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1826
+        }
+      },
+      "max_abs_r": 0.1826,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxGBPAUD",
+      "market": "forex",
+      "display_name": "GBP/AUD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.0998
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.2451
+        }
+      },
+      "max_abs_r": 0.2451,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxGBPCAD",
+      "market": "forex",
+      "display_name": "GBP/CAD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.4599
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.0684
+        }
+      },
+      "max_abs_r": 0.4599,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxGBPCHF",
+      "market": "forex",
+      "display_name": "GBP/CHF",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.4425
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.0875
+        }
+      },
+      "max_abs_r": 0.4425,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxGBPJPY",
+      "market": "forex",
+      "display_name": "GBP/JPY",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.2396
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.016
+        }
+      },
+      "max_abs_r": 0.2396,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxGBPNZD",
+      "market": "forex",
+      "display_name": "GBP/NZD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.2243
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1744
+        }
+      },
+      "max_abs_r": 0.2243,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxGBPUSD",
+      "market": "forex",
+      "display_name": "GBP/USD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.8471
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.1738
+        }
+      },
+      "max_abs_r": 0.8471,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxNZDJPY",
+      "market": "forex",
+      "display_name": "NZD/JPY",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1365
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.0912
+        }
+      },
+      "max_abs_r": 0.1365,
+      "outcome": "PASS"
+    },
+    {
+      "symbol": "frxNZDUSD",
+      "market": "forex",
+      "display_name": "NZD/USD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": 0.7269
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": 0.2375
+        }
+      },
+      "max_abs_r": 0.7269,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxUSDCAD",
+      "market": "forex",
+      "display_name": "USD/CAD",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.6577
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.159
+        }
+      },
+      "max_abs_r": 0.6577,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxUSDCHF",
+      "market": "forex",
+      "display_name": "USD/CHF",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.8715
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1748
+        }
+      },
+      "max_abs_r": 0.8715,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxUSDJPY",
+      "market": "forex",
+      "display_name": "USD/JPY",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.5261
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.0523
+        }
+      },
+      "max_abs_r": 0.5261,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxUSDMXN",
+      "market": "forex",
+      "display_name": "USD/MXN",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.6505
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.2461
+        }
+      },
+      "max_abs_r": 0.6505,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxUSDPLN",
+      "market": "forex",
+      "display_name": "USD/PLN",
+      "bars_fetched": 795,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 793,
+          "r": -0.8683
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 793,
+          "r": -0.1981
+        }
+      },
+      "max_abs_r": 0.8683,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxXAGUSD",
+      "market": "commodities",
+      "display_name": "Silver/USD",
+      "bars_fetched": 767,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 758,
+          "r": 0.3665
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 758,
+          "r": 0.3139
+        }
+      },
+      "max_abs_r": 0.3665,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxXAUUSD",
+      "market": "commodities",
+      "display_name": "Gold/USD",
+      "bars_fetched": 767,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 758,
+          "r": 0.4814
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 758,
+          "r": 0.2814
+        }
+      },
+      "max_abs_r": 0.4814,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxXPDUSD",
+      "market": "commodities",
+      "display_name": "Palladium/USD",
+      "bars_fetched": 767,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 758,
+          "r": 0.3339
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 758,
+          "r": 0.2216
+        }
+      },
+      "max_abs_r": 0.3339,
+      "outcome": "FAIL"
+    },
+    {
+      "symbol": "frxXPTUSD",
+      "market": "commodities",
+      "display_name": "Platinum/USD",
+      "bars_fetched": 767,
+      "fetch_note": "sufficient",
+      "correlations": {
+        "frxEURUSD": {
+          "n_matched_returns": 758,
+          "r": 0.3966
+        },
+        "cryBTCUSD": {
+          "n_matched_returns": 758,
+          "r": 0.2387
+        }
+      },
+      "max_abs_r": 0.3966,
+      "outcome": "FAIL"
+    }
+  ]
+}
