@@ -30,10 +30,16 @@ Facts reused from tools/fetch_candles.py (probed 2026-08-05, not assumed):
   - transport.call() cannot send ticks_history (its dispatcher matches the
     key "ticks"), so _ws_roundtrip is used directly
 
+Facts PROBED 2026-08-16 on the first run of this tool (not assumed):
+  - "product_type" is NOT an accepted property. Sending it returns
+    "Input validation failed: Properties not allowed: product_type."
+    The correct request is {"active_symbols": "brief"} and nothing else.
+    The earlier draft carried product_type as an assumption; it was wrong,
+    and the tool stopped rather than guessing.
+
 Facts ASSUMED about active_symbols and NOT yet probed. The tool fails loudly
 rather than guessing if any is wrong:
-  - the request {"active_symbols": "brief", "product_type": "basic"} returns
-    one frame carrying a list under the key "active_symbols"
+  - the response carries a list under the key "active_symbols" in one frame
   - each entry carries at least: symbol, display_name, market, submarket
   - synthetic instruments are identifiable by a market name containing
     "synthetic" (a symbol-prefix denylist is applied as a second defence)
@@ -234,8 +240,10 @@ def screen(limit: int | None, list_only: bool) -> int:
         print("auth ok (virtual account confirmed)")
         print()
 
+        # product_type is NOT accepted by this platform version - probed
+        # 2026-08-16. Send "active_symbols" alone.
         res = t._ws_roundtrip(
-            {"active_symbols": "brief", "product_type": "basic"},
+            {"active_symbols": "brief"},
             collect=1, timeout=30.0)
         symbols = None
         for f in res.get("_raw_frames") or []:
