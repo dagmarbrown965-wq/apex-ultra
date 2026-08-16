@@ -260,23 +260,54 @@ def screen(limit: int | None, list_only: bool) -> int:
             return 1
         print(f"active_symbols returned {len(symbols)} entries")
 
+        # STRUCTURE PROBE - a zero-eligible result must never be silent.
+        if not symbols:
+            print("ASSUMPTION VIOLATED: active_symbols list is empty.")
+            return 1
+        if not isinstance(symbols[0], dict):
+            print("ASSUMPTION VIOLATED: entries are not objects.")
+            print("first entry: " + json.dumps(symbols[0])[:400])
+            return 1
+        if "symbol" not in symbols[0]:
+            print("ASSUMPTION VIOLATED: entries carry no 'symbol' key.")
+            print("keys present : " + ", ".join(sorted(symbols[0].keys())))
+            print("first entry  : " + json.dumps(symbols[0])[:400])
+            return 1
+        print("first entry keys: " + ", ".join(sorted(symbols[0].keys())))
+
+        markets_seen: dict = {}
+        n_nosym = n_prev = n_synth = 0
         for s in symbols:
             sym = s.get("symbol")
             market = (s.get("market") or "").lower()
+            markets_seen[market] = markets_seen.get(market, 0) + 1
             if not sym:
+                n_nosym += 1
                 continue
             if sym in EXCLUDED_SYMBOLS:
+                n_prev += 1
                 results.append({"symbol": sym, "outcome": "EXCLUDED",
                                 "reason": "previously used (Section C.1)"})
                 continue
             if "synthetic" in market or sym.startswith(SYNTHETIC_PREFIXES):
+                n_synth += 1
                 results.append({"symbol": sym, "outcome": "EXCLUDED",
                                 "reason": f"synthetic (market={market})"})
                 continue
             eligible.append({"symbol": sym, "market": market,
                              "display_name": s.get("display_name")})
 
-        print(f"eligible candidates: {len(eligible)}")
+        print()
+        print("markets present in active_symbols:")
+        for m, n in sorted(markets_seen.items(), key=lambda kv: -kv[1]):
+            print(f"  {m or '(blank)':24s} {n:3d}")
+        print()
+        print("selection funnel:")
+        print(f"  entries returned      : {len(symbols)}")
+        print(f"  skipped, no symbol key: {n_nosym}")
+        print(f"  excluded, prev. used  : {n_prev}")
+        print(f"  excluded, synthetic   : {n_synth}")
+        print(f"  ELIGIBLE              : {len(eligible)}")
         print()
         if list_only:
             for c in eligible:
