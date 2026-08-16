@@ -470,20 +470,20 @@
       "symbol": "OTC_HSI",
       "market": "indices",
       "display_name": "Hong Kong 50",
-      "bars_fetched": 1718,
-      "fetch_note": "max_pages",
+      "bars_fetched": 2808,
+      "fetch_note": "sufficient",
       "correlations": {
         "frxEURUSD": {
-          "n_matched_returns": 1568,
-          "r": 0.2281
+          "n_matched_returns": 2563,
+          "r": 0.277
         },
         "cryBTCUSD": {
-          "n_matched_returns": 1568,
-          "r": 0.1818
+          "n_matched_returns": 2563,
+          "r": 0.2173
         }
       },
-      "max_abs_r": 0.0,
-      "outcome": "INSUFFICIENT"
+      "max_abs_r": 0.277,
+      "outcome": "PASS"
     },
     {
       "symbol": "OTC_N225",
