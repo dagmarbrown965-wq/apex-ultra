@@ -221,13 +221,14 @@ def _enough(series: dict, references: dict) -> bool:
     return True
 
 
-def _fetch_window(t, symbol: str, end_epoch: int, references: dict) -> tuple:
+def _fetch_window(t, symbol: str, end_epoch: int, references: dict,
+                  verbose: bool = False) -> tuple:
     """Page backwards from end_epoch, stopping as soon as every reference
     has enough matched returns. Returns (epoch->close, note)."""
     series: dict = {}
     end_param = int(end_epoch)
     empty_streak = 0
-    for _ in range(MAX_PAGES_PER_CANDIDATE):
+    for page in range(MAX_PAGES_PER_CANDIDATE):
         res = t._ws_roundtrip(
             {"ticks_history": symbol,
              "count": CANDLES_PER_REQUEST,
@@ -242,6 +243,9 @@ def _fetch_window(t, symbol: str, end_epoch: int, references: dict) -> tuple:
             return series, "no_response_frame"
         if not batch:
             empty_streak += 1
+            if verbose:
+                print(f"        page {page + 1:2d}: EMPTY (streak "
+                      f"{empty_streak}), stepping back a day from {end_param}")
             if empty_streak >= MAX_CONSECUTIVE_EMPTY:
                 return series, "history_exhausted_consecutive_empty"
             end_param -= WEEKEND_STEP_SECONDS
@@ -249,11 +253,22 @@ def _fetch_window(t, symbol: str, end_epoch: int, references: dict) -> tuple:
             continue
         empty_streak = 0
         newest = batch[-1][0]
+        if verbose:
+            span = (batch[-1][0] - batch[0][0]) / 86400.0
+            print(f"        page {page + 1:2d}: end={end_param} "
+                  f"returned={len(batch):4d} oldest={batch[0][0]} "
+                  f"newest={newest} span={span:6.2f}d")
         # SUBSTITUTION DEFENCE - identical rule to fetch_candles.
         if newest > end_param + GRANULARITY:
             return series, "substitution_detected"
+        before = len(series)
         for epoch, close in batch:
             series[epoch] = close
+        if verbose:
+            matched = {k: len(_matched_returns(series, v)[0])
+                       for k, v in references.items()}
+            print(f"                  new={len(series) - before:4d} "
+                  f"unique_total={len(series):5d} matched={matched}")
         if _enough(series, references):
             return series, "sufficient"
         end_param = batch[0][0] - 1
@@ -263,7 +278,8 @@ def _fetch_window(t, symbol: str, end_epoch: int, references: dict) -> tuple:
 
 # -------------------------------------------------------------------- main
 
-def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
+def screen(limit: int | None, list_only: bool, resume_from: str | None,
+           debug_symbol: str | None = None) -> int:
     if os.environ.get("LIVE_TRADING", "false").strip().lower() in (
             "1", "true", "yes", "on"):
         print("BLOCKED: LIVE_TRADING is enabled; refusing to run.")
@@ -396,6 +412,15 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
                       f"{c['display_name']}")
             return 0
 
+        if debug_symbol:
+            eligible = [c for c in eligible if c["symbol"] == debug_symbol]
+            if not eligible:
+                print(f"--debug-symbol {debug_symbol}: not in eligible list.")
+                return 1
+            print(f"--debug-symbol {debug_symbol}: per-page diagnostic run. "
+                  "This is a PROBE, not a screen.")
+            print()
+
         if resume_from:
             names = [c["symbol"] for c in eligible]
             if resume_from not in names:
@@ -415,7 +440,8 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
         for i, c in enumerate(eligible, 1):
             sym = c["symbol"]
             print(f"[{i}/{len(eligible)}] {sym}")
-            series, note = _fetch_window(t, sym, ref_end, references)
+            series, note = _fetch_window(t, sym, ref_end, references,
+                                         verbose=bool(debug_symbol))
 
             if note and note.startswith(TRANSPORT_FAILURE_NOTES):
                 print(f"      TRANSPORT FAILURE: {note}")
@@ -502,7 +528,8 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
                 if r.get("outcome") in ("PASS", "FAIL", "INSUFFICIENT",
                                         "NO_DATA")]
     survivors = [r for r in results if r.get("outcome") == "PASS"]
-    complete = (not aborted) and (limit is None) and (resume_from is None)
+    complete = ((not aborted) and limit is None and resume_from is None
+                and debug_symbol is None)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     suffix = "" if complete else "_PARTIAL"
@@ -569,8 +596,12 @@ def main() -> int:
                     help="enumerate eligible candidates and exit")
     ap.add_argument("--resume-from", type=str, default=None,
                     help="start at this symbol (records merge manually)")
+    ap.add_argument("--debug-symbol", type=str, default=None,
+                    help="per-page diagnostic for one symbol (a PROBE, "
+                         "not a screen; always writes _PARTIAL)")
     args = ap.parse_args()
-    return screen(args.limit, args.list_only, args.resume_from)
+    return screen(args.limit, args.list_only, args.resume_from,
+                  args.debug_symbol)
 
 
 if __name__ == "__main__":
