@@ -81,13 +81,28 @@ from infrastructure.broker.deriv.rest_transport import DerivRestOtpTransport
 
 GRANULARITY = 900                 # 15-minute bars, matching the stored series
 CANDLES_PER_REQUEST = 1000        # observed server cap
-SLEEP_BETWEEN_REQUESTS = 1.5      # within a candidate
-SLEEP_BETWEEN_CANDIDATES = 2.5    # extra pacing between candidates
-MAX_PAGES_PER_CANDIDATE = 4       # hard ceiling; early-stop usually hits first
+SLEEP_BETWEEN_REQUESTS = 2.5      # within a candidate; raised for v0.3 volume
+SLEEP_BETWEEN_CANDIDATES = 3.0    # extra pacing between candidates
+MAX_PAGES_PER_CANDIDATE = 12      # raised with MIN_MATCHED_RETURNS at v0.3
 MAX_CONSECUTIVE_EMPTY = 4         # long weekend / market-closed tolerance
 WEEKEND_STEP_SECONDS = 86400
-MIN_MATCHED_RETURNS = 500         # Section F criterion 2
+MIN_MATCHED_RETURNS = 2500        # Section F criterion 2, raised by Amdt v0.3
 INDEPENDENCE_CEILING = 0.30       # Section F criterion 2, |r| strictly below
+
+# Amendment v0.3 correction 1 - structural leg overlap. A cross sharing a leg
+# with a previously-used instrument is an algebraic function of it and can
+# show near-zero correlation purely through cancellation.
+EXCLUDED_LEGS = {"EUR", "USD", "BTC"}
+LEG_PREFIXES = ("frx", "cry")
+
+
+def _legs(symbol: str) -> tuple:
+    """Currency legs of a pair symbol, or () if it has no pair structure."""
+    for pre in LEG_PREFIXES:
+        if symbol.startswith(pre) and len(symbol) == len(pre) + 6:
+            rest = symbol[len(pre):]
+            return (rest[:3].upper(), rest[3:].upper())
+    return ()
 
 RETRY_BACKOFF_SECONDS = 20.0      # wait + reconnect before counting a failure
 ABORT_AFTER_CONSECUTIVE_FAILURES = 3
@@ -320,7 +335,7 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
         print(f"symbol key in use: {sym_key}")
 
         markets_seen: dict = {}
-        n_nosym = n_prev = n_synth = n_susp = 0
+        n_nosym = n_prev = n_synth = n_susp = n_legs = 0
         for s in symbols:
             sym = s.get(sym_key)
             market = (s.get("market") or "").lower()
@@ -348,6 +363,15 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
                                 "reason": f"synthetic (market={market},"
                                           f" subgroup={subgroup})"})
                 continue
+            shared = sorted(set(_legs(sym)) & EXCLUDED_LEGS)
+            if shared:
+                n_legs += 1
+                results.append({"symbol": sym, "outcome": "EXCLUDED",
+                                "reason": "shares currency leg "
+                                          f"{'/'.join(shared)} with a "
+                                          "previously-used instrument "
+                                          "(Amendment v0.3)"})
+                continue
             eligible.append({"symbol": sym, "market": market,
                              "display_name": s.get(name_key)})
 
@@ -362,6 +386,7 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
         print(f"  excluded, suspended   : {n_susp}")
         print(f"  excluded, prev. used  : {n_prev}")
         print(f"  excluded, synthetic   : {n_synth}")
+        print(f"  excluded, shared leg  : {n_legs}   (Amendment v0.3)")
         print(f"  ELIGIBLE              : {len(eligible)}")
         print()
 
@@ -481,7 +506,11 @@ def screen(limit: int | None, list_only: bool, resume_from: str | None) -> int:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     suffix = "" if complete else "_PARTIAL"
-    out_path = OUTPUT_DIR / f"screening_w48_0a_{ref_end}{suffix}.json"
+    # Filename carries the sample requirement so the v0.3 re-screen cannot
+    # overwrite or be confused with the superseded n>=500 record.
+    out_path = (OUTPUT_DIR /
+                f"screening_w48_0a_{ref_end}_n{MIN_MATCHED_RETURNS}"
+                f"{suffix}.json")
     payload = {
         "stage": "W48.0a independence screen",
         "agreement": "docs/PHASE_48_BOUNDARY_AGREEMENT.md v1.0 + v0.1 + v0.2",
