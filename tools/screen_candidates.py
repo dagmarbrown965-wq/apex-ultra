@@ -37,13 +37,22 @@ Facts PROBED 2026-08-16 on the first run of this tool (not assumed):
     The earlier draft carried product_type as an assumption; it was wrong,
     and the tool stopped rather than guessing.
 
-Facts ASSUMED about active_symbols and NOT yet probed. The tool fails loudly
-rather than guessing if any is wrong:
-  - the response carries a list under the key "active_symbols" in one frame
-  - each entry carries at least: symbol, display_name, market, submarket
-  - synthetic instruments are identifiable by a market name containing
-    "synthetic" (a symbol-prefix denylist is applied as a second defence)
-Confirm these on first run before trusting any output.
+  - entries do NOT carry a "symbol" key. This platform names it
+    "underlying_symbol", with the label in "underlying_symbol_name".
+    The earlier draft assumed "symbol" and silently produced zero
+    eligible candidates from 89 entries; the funnel instrumentation
+    below exists so that can never happen quietly again.
+  - entries carry: exchange_is_open, is_trading_suspended, market,
+    pip_size, subgroup, submarket, trade_count, underlying_symbol,
+    underlying_symbol_name, underlying_symbol_type
+  - synthetics ARE identifiable by market ("synthetic_index") and by
+    subgroup ("synthetics").
+  - underlying_symbol_type is NOT reliable for classification: it reads
+    "stockindex" for Volatility 100 (1s) Index. Do not filter on it.
+
+Facts still ASSUMED and NOT probed:
+  - ticks_history accepts the underlying_symbol value as its symbol
+    argument (it accepted frxEURUSD and cryBTCUSD in W46.0/W47.1)
 
 Sends no execution ops. Writes only under engine/output/.
 
@@ -268,34 +277,51 @@ def screen(limit: int | None, list_only: bool) -> int:
             print("ASSUMPTION VIOLATED: entries are not objects.")
             print("first entry: " + json.dumps(symbols[0])[:400])
             return 1
-        if "symbol" not in symbols[0]:
-            print("ASSUMPTION VIOLATED: entries carry no 'symbol' key.")
+        # Probed 2026-08-16: this platform names it underlying_symbol.
+        # "symbol" retained as a fallback in case the field is restored.
+        sym_key = next((k for k in ("underlying_symbol", "symbol")
+                        if k in symbols[0]), None)
+        if sym_key is None:
+            print("ASSUMPTION VIOLATED: entries carry no symbol key.")
             print("keys present : " + ", ".join(sorted(symbols[0].keys())))
             print("first entry  : " + json.dumps(symbols[0])[:400])
             return 1
-        print("first entry keys: " + ", ".join(sorted(symbols[0].keys())))
+        name_key = ("underlying_symbol_name"
+                    if "underlying_symbol_name" in symbols[0]
+                    else "display_name")
+        print(f"symbol key in use: {sym_key}")
 
         markets_seen: dict = {}
-        n_nosym = n_prev = n_synth = 0
+        n_nosym = n_prev = n_synth = n_susp = 0
         for s in symbols:
-            sym = s.get("symbol")
+            sym = s.get(sym_key)
             market = (s.get("market") or "").lower()
+            subgroup = (s.get("subgroup") or "").lower()
             markets_seen[market] = markets_seen.get(market, 0) + 1
             if not sym:
                 n_nosym += 1
+                continue
+            if s.get("is_trading_suspended"):
+                n_susp += 1
+                results.append({"symbol": sym, "outcome": "EXCLUDED",
+                                "reason": "trading suspended"})
                 continue
             if sym in EXCLUDED_SYMBOLS:
                 n_prev += 1
                 results.append({"symbol": sym, "outcome": "EXCLUDED",
                                 "reason": "previously used (Section C.1)"})
                 continue
-            if "synthetic" in market or sym.startswith(SYNTHETIC_PREFIXES):
+            # NOTE: underlying_symbol_type is unreliable (reads "stockindex"
+            # for Volatility 100). Classify on market/subgroup/prefix only.
+            if ("synthetic" in market or "synthetic" in subgroup
+                    or sym.startswith(SYNTHETIC_PREFIXES)):
                 n_synth += 1
                 results.append({"symbol": sym, "outcome": "EXCLUDED",
-                                "reason": f"synthetic (market={market})"})
+                                "reason": f"synthetic (market={market},"
+                                          f" subgroup={subgroup})"})
                 continue
             eligible.append({"symbol": sym, "market": market,
-                             "display_name": s.get("display_name")})
+                             "display_name": s.get(name_key)})
 
         print()
         print("markets present in active_symbols:")
@@ -305,6 +331,7 @@ def screen(limit: int | None, list_only: bool) -> int:
         print("selection funnel:")
         print(f"  entries returned      : {len(symbols)}")
         print(f"  skipped, no symbol key: {n_nosym}")
+        print(f"  excluded, suspended   : {n_susp}")
         print(f"  excluded, prev. used  : {n_prev}")
         print(f"  excluded, synthetic   : {n_synth}")
         print(f"  ELIGIBLE              : {len(eligible)}")
