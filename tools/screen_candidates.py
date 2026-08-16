@@ -44,6 +44,13 @@ Facts PROBED 2026-08-16 by running this tool:
     4 commodities, 2 cryptocurrency.
   - underlying_symbol_type is NOT reliable for classification: it reads
     "stockindex" for Volatility 100 (1s) Index. Do not filter on it.
+  - `count` IS A TIME WINDOW, NOT A CANDLE CAP. Probed on OTC_HSI: a request
+    for count=1000 at granularity=900 returned 205 candles spanning 10.27
+    days, and every subsequent page spanned at or under 10.42 days
+    (= 1000 * 900s). The server returns whatever candles exist within
+    [end - count*granularity, end]. tools/fetch_candles.py lists "per-request
+    cap is 1000 candles" among its verified facts; that description is wrong,
+    though harmless there because MAX_REQUESTS=100 absorbs the difference.
   - SUSTAINED ticks_history REQUESTS FAIL. A run that screened 3 candidates
     (12 requests) succeeded; a run immediately after failed from candidate 2
     onward with no response frame, for symbols that had just worked. The
@@ -83,7 +90,13 @@ GRANULARITY = 900                 # 15-minute bars, matching the stored series
 CANDLES_PER_REQUEST = 1000        # observed server cap
 SLEEP_BETWEEN_REQUESTS = 2.5      # within a candidate; raised for v0.3 volume
 SLEEP_BETWEEN_CANDIDATES = 3.0    # extra pacing between candidates
-MAX_PAGES_PER_CANDIDATE = 12      # raised with MIN_MATCHED_RETURNS at v0.3
+# `count` is a TIME WINDOW, not a candle cap: the server returns whatever
+# exists in [end - count*granularity, end]. At 1000*900s that is 10.42 days
+# per request regardless of instrument. A low-duty-cycle market (OTC_HSI:
+# short session plus lunch break, ~26 bars/trading day) therefore yields
+# ~140 candles per request, not 1000, and needs ~20 pages to reach 2500.
+# Early-stop means high-duty-cycle instruments still finish in 3-4.
+MAX_PAGES_PER_CANDIDATE = 40
 MAX_CONSECUTIVE_EMPTY = 4         # long weekend / market-closed tolerance
 WEEKEND_STEP_SECONDS = 86400
 MIN_MATCHED_RETURNS = 2500        # Section F criterion 2, raised by Amdt v0.3
