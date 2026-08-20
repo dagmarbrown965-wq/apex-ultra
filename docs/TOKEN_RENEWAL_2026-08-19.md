@@ -62,3 +62,19 @@ necessity holds; no guard was altered to accommodate this renewal.
 - live_signals_2026-08-19_session001.jsonl and its summary are artifacts of
   this token probe. Not Phase 44 window evidence, not Phase 48 evidence.
   Left untracked deliberately.
+
+## Resolution of the 07-22 orphan (same day)
+
+Benign. session_summary_live_signals_2026-07-22_session002.json records 36
+ticks seen, 36 rejected, buffer_depth 0, signals_emitted 0, manual_stop. The
+journal is created lazily on first emit; the summary is written unconditionally
+at session end. A session that emits nothing therefore leaves a summary and no
+journal. Nothing was deleted.
+
+This completes the day-12 explanation: 07-22 session001 was the 1,954-byte stub
+and session002 rejected every tick, so the whole day was correctly excluded by
+the commit boundary.
+
+Carry forward: that summary looks healthy at a glance - full field set, clean
+exit, live_orders_sent 0. The failure shows only in ticks_rejected against
+ticks_seen. A summary-reading tool should assert ticks_rejected < ticks_seen.
