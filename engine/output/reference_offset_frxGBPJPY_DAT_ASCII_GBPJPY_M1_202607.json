@@ -1,0 +1,120 @@
+{
+  "stage": "W48.0b step 1 - reference offset identification",
+  "agreement": "docs/PHASE_48_BOUNDARY_AGREEMENT.md v1.0 + v0.1-v0.7",
+  "reference_file": "DAT_ASCII_GBPJPY_M1_202607.csv",
+  "reference_sha256": "70009d82358c9e79869e8a0d1df81675e8b5d1427b717bfa5ad8d76de3ab0f34",
+  "reference_stats": {
+    "rows_in": 32667,
+    "rows_dropped_duplicate_minutes": 228,
+    "rows_kept": 32439,
+    "buckets_total": 2179,
+    "buckets_complete": 2092,
+    "buckets_partial_excluded": 87
+  },
+  "symbol": "frxGBPJPY",
+  "deriv_bars_fetched": 2794,
+  "identification_rule": {
+    "best_min": 0.9,
+    "runnerup_max": 0.6,
+    "min_matched_returns": 500,
+    "hour_offsets": [
+      0,
+      -4,
+      -5
+    ],
+    "bar_shifts": [
+      -1,
+      0,
+      1
+    ]
+  },
+  "table": [
+    {
+      "hours": 0,
+      "bars": -1,
+      "n": 1922,
+      "r": -0.016785,
+      "sd_reference": 0.00032748,
+      "sd_deriv": 0.00039554,
+      "evaluable": true
+    },
+    {
+      "hours": 0,
+      "bars": 0,
+      "n": 1926,
+      "r": 0.083564,
+      "sd_reference": 0.00032724,
+      "sd_deriv": 0.00037476,
+      "evaluable": true
+    },
+    {
+      "hours": 0,
+      "bars": 1,
+      "n": 1930,
+      "r": 0.006747,
+      "sd_reference": 0.00032693,
+      "sd_deriv": 0.00042687,
+      "evaluable": true
+    },
+    {
+      "hours": -4,
+      "bars": -1,
+      "n": 1986,
+      "r": -0.031854,
+      "sd_reference": 0.000324,
+      "sd_deriv": 0.00032318,
+      "evaluable": true
+    },
+    {
+      "hours": -4,
+      "bars": 0,
+      "n": 1990,
+      "r": 0.992238,
+      "sd_reference": 0.00032382,
+      "sd_deriv": 0.00032222,
+      "evaluable": true
+    },
+    {
+      "hours": -4,
+      "bars": 1,
+      "n": 1990,
+      "r": 0.022239,
+      "sd_reference": 0.00032384,
+      "sd_deriv": 0.00043422,
+      "evaluable": true
+    },
+    {
+      "hours": -5,
+      "bars": -1,
+      "n": 1990,
+      "r": -0.000258,
+      "sd_reference": 0.00032378,
+      "sd_deriv": 0.00048026,
+      "evaluable": true
+    },
+    {
+      "hours": -5,
+      "bars": 0,
+      "n": 1990,
+      "r": 0.067624,
+      "sd_reference": 0.0003237,
+      "sd_deriv": 0.0004827,
+      "evaluable": true
+    },
+    {
+      "hours": -5,
+      "bars": 1,
+      "n": 1990,
+      "r": 0.001428,
+      "sd_reference": 0.00032363,
+      "sd_deriv": 0.00047607,
+      "evaluable": true
+    }
+  ],
+  "identified": {
+    "hours": -4,
+    "bars": 0,
+    "r": 0.992238,
+    "n": 1990
+  }
+}
