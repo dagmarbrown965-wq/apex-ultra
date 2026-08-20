@@ -1,0 +1,23 @@
+{
+  "symbol": "frxGBPJPY",
+  "granularity": 900,
+  "data_path": "engine\\output\\candles_frxGBPJPY_900_1755657580_1787193000.jsonl",
+  "candle_count": 24257,
+  "first_epoch": 1755657580,
+  "last_epoch": 1787193000,
+  "span_seconds": 31535420,
+  "span_days": 364.993,
+  "requests_made": 37,
+  "empty_responses": 0,
+  "stop_reason": "history_boundary_substitution",
+  "substitution_note": {
+    "requested_end": 1755657579,
+    "returned_newest": 1787193000,
+    "excess_seconds": 31535421
+  },
+  "largest_gap_seconds": 184500,
+  "largest_gap_after_epoch": 1755895500,
+  "gaps_over_granularity_count": 55,
+  "candles_per_request": 1000,
+  "note": "For forex, gaps larger than the granularity are expected at weekends and are reported, never smoothed or backfilled. For crypto (24/7) any such gap is a data anomaly."
+}
