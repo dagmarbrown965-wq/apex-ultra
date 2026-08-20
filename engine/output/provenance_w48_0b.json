@@ -1,0 +1,186 @@
+{
+  "stage": "W48.0b step 2 - provenance verification",
+  "agreement": "docs/PHASE_48_BOUNDARY_AGREEMENT.md v1.0 + v0.1-v0.8",
+  "run_complete": true,
+  "aborted": false,
+  "abort_reason": null,
+  "screening_record": "engine/output\\screening_w48_0a_1786008600_n2500.json",
+  "offset_record": "engine/output\\reference_offset_frxGBPJPY_DAT_ASCII_GBPJPY_M1_202607.json",
+  "identified_offset": {
+    "hours": -4,
+    "bars": 0,
+    "r": 0.992238,
+    "n": 1990
+  },
+  "provenance_floor": 0.95,
+  "min_matched_returns": 500,
+  "selection_rule": "lowest independence max|r| among passers (Amendment v0.8)",
+  "selected": "frxGBPJPY",
+  "disclosure": "frxGBPJPY's provenance figure is not independent of the clock identification, which was performed on frxGBPJPY",
+  "results": [
+    {
+      "symbol": "OTC_FCHI",
+      "independence_max_abs_r": 0.2807,
+      "outcome": "NOT_VERIFIABLE",
+      "reason": "no obtainable independent reference (Amendment v0.4)"
+    },
+    {
+      "symbol": "OTC_FTSE",
+      "independence_max_abs_r": 0.2322,
+      "outcome": "NOT_VERIFIABLE",
+      "reason": "no obtainable independent reference (Amendment v0.4)"
+    },
+    {
+      "symbol": "OTC_HSI",
+      "independence_max_abs_r": 0.277,
+      "outcome": "NOT_VERIFIABLE",
+      "reason": "no obtainable independent reference (Amendment v0.4)"
+    },
+    {
+      "symbol": "OTC_SSMI",
+      "independence_max_abs_r": 0.2101,
+      "outcome": "NOT_VERIFIABLE",
+      "reason": "no obtainable independent reference (Amendment v0.4)"
+    },
+    {
+      "symbol": "frxAUDCHF",
+      "independence_max_abs_r": 0.1747,
+      "reference": "reference\\DAT_ASCII_AUDCHF_M1_202607.csv",
+      "outcome": "FAIL",
+      "reference_sha256": "6e35dd6e83d26da08fc432605195413d9bfe6d8a11cb4015c9282132db6cb725",
+      "reference_stats": {
+        "rows_in": 32448,
+        "rows_dropped_duplicate_minutes": 10,
+        "rows_kept": 32438,
+        "buckets_total": 2180,
+        "buckets_complete": 2060,
+        "buckets_partial_excluded": 120
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 1943,
+      "r": 0.943527,
+      "sd_reference": 0.00036123,
+      "sd_deriv": 0.00034574
+    },
+    {
+      "symbol": "frxAUDJPY",
+      "independence_max_abs_r": 0.1707,
+      "reference": "reference\\DAT_ASCII_AUDJPY_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "9a5d314ebe11fb98a47f7ac9639f8437b3293314aaaf6c0fa29790b7eb2260c7",
+      "reference_stats": {
+        "rows_in": 32630,
+        "rows_dropped_duplicate_minutes": 111,
+        "rows_kept": 32519,
+        "buckets_total": 2180,
+        "buckets_complete": 2114,
+        "buckets_partial_excluded": 66
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 2036,
+      "r": 0.988447,
+      "sd_reference": 0.00042246,
+      "sd_deriv": 0.00041665
+    },
+    {
+      "symbol": "frxAUDNZD",
+      "independence_max_abs_r": 0.1746,
+      "reference": "reference\\DAT_ASCII_AUDNZD_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "54c7d03b281dcc7c2da973779df2c5cd32dc1cf9e0a727754385be975bfbabf2",
+      "reference_stats": {
+        "rows_in": 32569,
+        "rows_dropped_duplicate_minutes": 32,
+        "rows_kept": 32537,
+        "buckets_total": 2180,
+        "buckets_complete": 2117,
+        "buckets_partial_excluded": 63
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 2026,
+      "r": 0.978059,
+      "sd_reference": 0.0002743,
+      "sd_deriv": 0.00027826
+    },
+    {
+      "symbol": "frxGBPAUD",
+      "independence_max_abs_r": 0.2196,
+      "reference": "reference\\DAT_ASCII_GBPAUD_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "4ec774deb16a71dea2dd709f73e55ab71391e1083bdfea8872d2ed9ecd170a9a",
+      "reference_stats": {
+        "rows_in": 32509,
+        "rows_dropped_duplicate_minutes": 40,
+        "rows_kept": 32469,
+        "buckets_total": 2177,
+        "buckets_complete": 2135,
+        "buckets_partial_excluded": 42
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 2064,
+      "r": 0.974185,
+      "sd_reference": 0.00031341,
+      "sd_deriv": 0.00031156
+    },
+    {
+      "symbol": "frxGBPJPY",
+      "independence_max_abs_r": 0.0548,
+      "reference": "reference\\DAT_ASCII_GBPJPY_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "70009d82358c9e79869e8a0d1df81675e8b5d1427b717bfa5ad8d76de3ab0f34",
+      "reference_stats": {
+        "rows_in": 32667,
+        "rows_dropped_duplicate_minutes": 228,
+        "rows_kept": 32439,
+        "buckets_total": 2179,
+        "buckets_complete": 2092,
+        "buckets_partial_excluded": 87
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 1990,
+      "r": 0.992238,
+      "sd_reference": 0.00032382,
+      "sd_deriv": 0.00032222
+    },
+    {
+      "symbol": "frxGBPNZD",
+      "independence_max_abs_r": 0.2757,
+      "reference": "reference\\DAT_ASCII_GBPNZD_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "a1c2a21cf08c14187812287198dd53582d329e82a0c7419d1364120d3802bd5f",
+      "reference_stats": {
+        "rows_in": 32278,
+        "rows_dropped_duplicate_minutes": 8,
+        "rows_kept": 32270,
+        "buckets_total": 2173,
+        "buckets_complete": 2106,
+        "buckets_partial_excluded": 67
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 2031,
+      "r": 0.969369,
+      "sd_reference": 0.00034443,
+      "sd_deriv": 0.00034091
+    },
+    {
+      "symbol": "frxNZDJPY",
+      "independence_max_abs_r": 0.1916,
+      "reference": "reference\\DAT_ASCII_NZDJPY_M1_202607.csv",
+      "outcome": "PASS",
+      "reference_sha256": "947ed416b969146f1235ec2981c285c7d8e2e0ce0208c256e9f4af1441267926",
+      "reference_stats": {
+        "rows_in": 32520,
+        "rows_dropped_duplicate_minutes": 87,
+        "rows_kept": 32433,
+        "buckets_total": 2180,
+        "buckets_complete": 2060,
+        "buckets_partial_excluded": 120
+      },
+      "deriv_bars": 2794,
+      "n_matched_returns": 1952,
+      "r": 0.976526,
+      "sd_reference": 0.00048997,
+      "sd_deriv": 0.00048209
+    }
+  ]
+}
