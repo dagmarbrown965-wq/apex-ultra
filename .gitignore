@@ -15,3 +15,7 @@ engine/output/resolutions_1*.jsonl
 *token*.txt
 *.token
 demo_token*
+
+# Phase 48 reference data (amendment v0.7): bulk ignored, gap reports committed
+reference/*.csv
+reference/*.zip
