@@ -278,6 +278,112 @@ removes the adjacency. Resolve by deciding what in that directory is still
 wanted, rather than by bulk deletion. Note `APEX_V6_demo_review_2026-11-16.md`
 there is dated the same day and its provenance is unestablished.
 
+## N11. Summaries carry no SHA-256, though Section D.4 requires it
+
+**Section D.4** of the boundary agreement: *"SHA-256 of each completed data file
+computed and recorded in its summary at acquisition time, before any analysis
+exists."*
+
+**The tool has never done this.** Verified 2026-11-16 by reading the summaries
+of all three datasets — Phase 46 `frxEURUSD`, and Phase 48 D1 and D2. None
+contains a hash field.
+
+For D1 and D2 the hashes were computed by hand and recorded in the seal
+documents, so **D.4 is satisfied in substance but not literally**: the hash does
+exist, before any analysis, in a committed artifact. For the Phase 46 dataset no
+hash was ever recorded anywhere.
+
+**Fix:** hash the data file between writing it and writing the summary — the
+file is closed at that point, so this is a few lines and no behavioural change.
+Deliberately **not** bundled into the 2026-11-16 D1/N1 patch: that change had an
+agreed two-item scope, and expanding scope mid-session is how the second mistake
+happens. Needs its own short plan.
+
+Note this is the same family as N1 — a tool not emitting what an agreement
+requires, with the gap covered by hand each time and nobody noticing the tool
+never changed.
+
+## N12. The Claude project mirror produces documents that never become real
+
+**Three instances found on 2026-11-16**, which makes it a mechanism rather than
+an accident:
+
+| Document | Status |
+|---|---|
+| `APEX_DEFERRED_FIXES.md` | Mirror-only since 2026-08-24. Committed 2026-11-16 (`3a811b5`). |
+| `PHASE_48_AMENDMENT_V0_6.md` | Mirror-only since 2026-08-20, while `v0.7` cited it and both seals claimed "v0.1–v0.10/v0.11". Committed 2026-11-16 (`d48991f`). |
+| `PHASE_42_1_BOUNDARY_AGREEMENT.md` | Never existed anywhere. Cited by the Phase 42.1 handoff as a "locked five-point agreement". **Not reconstructable** — see A2. |
+
+The first two are repaired. **The mechanism is not.** Writing a document in the
+project mirror feels like producing it, and nothing checks the mirror against
+`docs/`. Under filesystem-is-source-of-truth a mirror-only document does not
+exist, however complete it looks and however many other documents cite it.
+
+**Proposed standing check**, in the same family as N5: any session that writes a
+durable document compares the mirror's Phase-48-era document list against
+`docs/` before closing, and treats a mirror-only document as a finding. Cheap,
+and it would have caught v0.6 in August.
+
+---
+
+# INCIDENT
+
+## I1. Phase 46 dataset deleted by a wildcard, 2026-11-16
+
+**The advisor wrote a `Remove-Item` glob over `engine/output/`, a directory
+holding sealed and historical evidence, when the fetch had just printed the two
+exact filenames that needed removing.**
+
+```powershell
+Remove-Item .\engine\output\candles_frxEURUSD_900_*.jsonl, .\engine\output\candles_frxEURUSD_900_*_summary.json
+```
+
+Intended to clear the `--days 1` smoke-test artifacts
+(`candles_frxEURUSD_900_1793964024_1794863700.*`). It also matched the **Phase
+46 dataset**, `candles_frxEURUSD_900_1754473235_1786008600.*`.
+
+**What was recovered.** The `_summary.json` is tracked and was restored
+immediately with `git restore`. Its content is intact: 24,257 bars, 364.993
+days, 55 gaps, substitution defence at request 37.
+
+**What was lost, on the balance of evidence.** The `.jsonl` is gitignored, so
+git cannot confirm whether it was present. It is absent now. Phase 47's
+`candles_cryBTCUSD_900_*.jsonl` (3,485,479 bytes) is still in that directory
+from August, and there is no reason Phase 46's would have been removed while
+Phase 47's was kept. **Treat it as deleted by this command.** `Remove-Item`
+bypasses the Recycle Bin and the repo is not synced, so there is no copy.
+
+**It cannot be re-fetched.** The series begins at epoch 1754473235 —
+2025-08-06, more than 365 days before 2026-11-16 — which is past Deriv's served
+history wall.
+
+**Assessed impact: real but not load-bearing.**
+
+- **No SHA-256 was ever recorded** for this file (see N11), so it could never
+  have served as verifiable provenance.
+- Phase 46's strategy failed, and the ceiling check at `a1ff0cf` already
+  recorded the dataset as contaminated for holdout purposes. It had no future
+  evidentiary role.
+- Amendment v0.9's completeness benchmark of **66.4588 bars/day** was derived
+  from it and is independently recorded, as are all its structural statistics,
+  in the restored summary. Nothing in D1's or D2's acceptance depends on the raw
+  file still existing.
+
+What is lost is the ability to re-derive that benchmark from source, or to
+compute the hash that was never taken.
+
+**Correct command, for the record:** the two literal paths the fetch printed.
+Not a glob.
+
+**Rule going forward:** never use a wildcard delete in `engine/output/`. That
+directory holds sealed datasets whose seals state in terms that an
+unreproducible hash voids provenance. Deletions there name files explicitly, one
+by one.
+
+**The sealed `frxGBPJPY` files were never at risk** — the glob was EUR/USD
+specific — but that was a consequence of the smoke test's symbol choice, not of
+care in writing the command.
+
 ---
 
 # ESCALATED / RESOLVED
@@ -350,6 +456,12 @@ intentional: the backup benefits from sync, the repo does not.
 * **2026-08-25** — The W48.4 reminder misfired 66 days early, re-derived the
   fetch date as 2026-10-30, and surfaced the D1-last-epoch anchor discrepancy
   now closed as C1.
+* **2026-11-16, later** — D1 and N1 fixed in `tools/fetch_candles.py` and
+  closed. A1 and A2 investigated and resolved: `rest403_probe.py` lost, the
+  Phase 42.1 agreement never existed and is deliberately not reconstructed.
+  N11 and N12 raised. Amendment v0.6 found mirror-only and committed verbatim
+  with a dated preamble (`d48991f`), closing the v0.1–v0.11 chain. Incident I1
+  recorded: the advisor's wildcard delete destroyed the Phase 46 dataset.
 * **2026-11-16** — This list committed to the filesystem for the first time.
   C1 closed; D1's deferral condition satisfied; A1 and A2 confirmed absent by
   `Test-Path`; N1–N9 raised during the D2 acquisition session; E1 partially
