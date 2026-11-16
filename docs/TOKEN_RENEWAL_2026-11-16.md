@@ -68,7 +68,7 @@ This caught a silent no-op today: a `Read-Host` that did not take, which
 produced an identical probe result and was briefly mistaken for a repeated
 failure.
 
-## UNRESOLVED: a third active token this project does not account for
+## A third token this project did not account for — unidentified, deleted
 
 | Field | Value |
 |---|---|
@@ -77,7 +77,7 @@ failure.
 | Key suffix | `4ec9` |
 | Expires | 2026-12-12 |
 | Implied creation | ~2026-09-13 (90-day cap) |
-| Status | **Active** |
+| Status | **Deleted 2026-11-16** |
 
 No Phase 48 document, and no document in `docs/`, mentions this token. It was
 created roughly four weeks after the August renewal and never recorded.
@@ -88,13 +88,31 @@ the dashboard held an unrecorded `apex_trade_demo_4`. The one-active-token rule
 exists to make that impossible, and on 2026-11-16 the dashboard held **three**
 active Trade-scoped tokens.
 
-**Pending CEO identification.** If unrecognised, it should be deleted: an
-active Trade-scoped credential of unknown provenance is exactly what the demo
-account's compensating code guards are not designed to excuse. If recognised,
-it should be documented here with its purpose and owner.
+**Unrecognised by the CEO, and deleted 2026-11-16** — after this record had
+captured its name, suffix, scope and expiry, which is the whole of what the
+dashboard could disclose: it shows no creation date and, as noted above, no
+"Last used" column. An active Trade-scoped credential of unknown provenance is
+not something the demo account's compensating code guards are designed to
+excuse, and preserving it four more weeks to protect four fields already
+written down would have been the worse trade.
 
-Not deleted in this session, because deleting an unidentified credential
-destroys the evidence of what it was.
+The deletion also functions as a probe. If some tool or routine stops working
+in the coming weeks, that identifies what the token was for — more than
+inspecting it could have revealed.
+
+**What remains unexplained is not the token but the gap.** It was created around
+2026-09-13, between the August renewal and this one, by a session that left no
+record in `docs/` and no mention in any Phase 48 document. The one-active-token
+rule did not fail; nothing enforced it. Each renewal records its own state and
+nothing checks the dashboard against the record between renewals — which is
+precisely how August's `apex_trade_demo_4` went unrecorded for weeks, and how
+this one went unrecorded for two months.
+
+**Recommendation for the phase close:** a renewal is not the only moment the
+dashboard should be read. Any session that touches Deriv credentials should
+list the active tokens and compare them against the current
+`docs/TOKEN_RENEWAL_*.md`, treating a mismatch as a finding. That check costs
+one page load and would have caught this in September.
 
 ## A credential of unknown origin was in the environment
 
