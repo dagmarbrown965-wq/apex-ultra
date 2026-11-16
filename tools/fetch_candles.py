@@ -14,7 +14,11 @@ Verified facts this tool relies on (probed 2026-08-05, not assumed):
   - a candles response arrives in ONE frame; collect must be 1
   - candles are ordered OLDEST-FIRST, fields: epoch/open/high/low/close
   - `end` accepts an epoch integer; the batch ends AT that epoch
-  - per-request cap is 1000 candles
+  - count is a TIME WINDOW, not a candle cap: count=1000 at 900s spans
+    1000 * 900 = 900,000 s = 10.4167 days, and returns however many candles
+    the market actually printed in that window (fewer across weekends).
+    Sizing a fetch by candle count will under-request. Corrected 2026-11-16
+    after Phase 48 closed; the original line claimed a 1000-candle cap.
   - WEEKENDS return {"candles": []} -- normal, NOT exhaustion. Forex is
     closed Friday evening to Sunday evening.
   - PAST THE HISTORY BOUNDARY Deriv SILENTLY RETURNS CURRENT DATA while
@@ -249,6 +253,25 @@ def fetch(days: float, symbol: str) -> int:
         "largest_gap_after_epoch": gap_at,
         "gaps_over_granularity_count": gaps_over_expected,
         "candles_per_request": CANDLES_PER_REQUEST,
+        "first_close": candles[epochs[0]][3],
+        "last_close": candles[epochs[-1]][3],
+        "min_close": min(v[3] for v in candles.values()),
+        "max_close": max(v[3] for v in candles.values()),
+        "first_record": {"epoch": epochs[0],
+                         "open": candles[epochs[0]][0],
+                         "high": candles[epochs[0]][1],
+                         "low": candles[epochs[0]][2],
+                         "close": candles[epochs[0]][3]},
+        "last_record": {"epoch": epochs[-1],
+                        "open": candles[epochs[-1]][0],
+                        "high": candles[epochs[-1]][1],
+                        "low": candles[epochs[-1]][2],
+                        "close": candles[epochs[-1]][3]},
+        "identity_check_note": ("Amendment v0.10 bounded instrument-identity "
+                                "check, emitted by the tool from 2026-11-16. "
+                                "The D1 and D2 summaries predate this and "
+                                "carry the check in their seals instead. "
+                                "Nothing is derived from these values."),
         "note": ("For forex, gaps larger than the granularity are expected "
                  "at weekends and are reported, never smoothed or backfilled. "
                  "For crypto (24/7) any such gap is a data anomaly."),

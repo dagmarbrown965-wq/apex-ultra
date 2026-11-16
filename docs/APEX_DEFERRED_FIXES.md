@@ -31,25 +31,28 @@ for.
 
 ---
 
-# DEFERRAL EXPIRING
+# CLOSED — fixed 2026-11-16, after the phase close
 
-## D1. False docstring in `tools/fetch_candles.py` line 17
+## D1. False docstring in `tools/fetch_candles.py` — **FIXED**
 
-**Verified present 2026-11-16.** The docstring states the per-request cap is
-1000 candles. It is not a candle cap: `count` is a **time window**, and
-`count=1000` at 900 s spans 900,000 s = **10.42 days**.
+The docstring claimed the per-request cap was 1000 candles. It is not a candle
+cap: `count` is a **time window**, and `count=1000` at 900 s spans 900,000 s =
+**10.4167 days**.
 
-**The deferral's condition is now satisfied in substance.** It was deferred
-because Section D.1 pins the tool as reused **verbatim**, and editing it between
-the two fetches would mean D1 and D2 were not produced by a byte-identical
-tool. Both fetches have now run against the identical file — D1 on 2026-08-19,
-D2 on 2026-11-16. The verbatim requirement is fully discharged.
+Deferred since 2026-08-24 because Section D.1 pinned the tool as reused
+**verbatim**, and editing it between the two fetches would have meant D1 and D2
+were not produced by a byte-identical file. Both fetches ran against the
+identical tool — D1 on 2026-08-19, D2 on 2026-11-16 — so the verbatim
+requirement was fully discharged at the phase close, and the line was corrected
+the same day.
 
-**Fix at the W48.5 phase close.** Nothing further blocks it.
+The operational risk was real and nearly bit: the D2 run sheet had to carry the
+correction explicitly, and the fetch was sized from the time-window reading
+rather than from the docstring.
 
-The operational risk it created was real and nearly bit: the D2 run sheet had to
-carry the correction explicitly, and sizing was computed from the time-window
-reading rather than the docstring.
+**Demonstrated live during verification.** A smoke fetch at `--days 1` returned
+a **10.413-day** span from a single request — one request window is the minimum
+fetch granularity, which is precisely what the old line obscured.
 
 ---
 
@@ -120,15 +123,35 @@ agreement was committed**, and leave it at that.
 
 # NEW — raised in the 2026-11-16 session
 
-## N1. The fetcher does not emit the Amendment v0.10 identity fields
+## N1. The fetcher did not emit the Amendment v0.10 identity fields — **FIXED 2026-11-16**
 
 v0.10 requires a bounded instrument-identity check (first/last/min/max close,
-first and last raw records). `tools/fetch_candles.py` writes none of them into
-its summary, so every phase must compute them by hand — and **after a seal that
-requires a committed script**, because the commit-before-read rule then binds.
-Done by console command for D2 at acquisition time, before the seal existed.
+first and last raw records). The tool wrote none of them, so every phase had to
+compute them by hand — and **after a seal, that requires a committed script**,
+because the commit-before-read rule binds. For D2 it was done by console command
+at acquisition time, before the seal existed.
 
-Fix with the D1 docstring fix, once the tool is unfrozen.
+**Now emitted by the tool.** The summary gains `first_close`, `last_close`,
+`min_close`, `max_close`, `first_record`, `last_record` and an
+`identity_check_note`. Values are derived from the epoch-keyed `candles` dict
+already in memory — no additional requests, and no change to pagination, the
+substitution defence, gap handling, stop conditions, or the `.jsonl` output.
+
+**Why the raw records are included despite duplicating the `.jsonl`:** once a
+dataset is sealed, the summary is the only readable artifact. Holding the first
+and last records there lets a future phase re-verify instrument identity without
+opening sealed data at all.
+
+**Verified** by a throwaway `--days 1` fetch on `frxEURUSD` (deliberately not
+`frxGBPJPY`, so the artifact could not be mistaken for sealed data; both files
+deleted afterwards). The fields were emitted correctly, with closes of
+**1.09924–1.12504** — a pair quoted near unity, which is exactly the case the
+v0.10 check exists to exclude.
+
+**Known and intended consequence:** the D1 and D2 summaries predate this change
+and do not carry the fields. They are **not** regenerated — their identity
+checks live in their seals. Future summaries therefore differ in shape from the
+two sealed ones.
 
 ## N2. Section G.1's "failure mode is silence" is wrong for the fetch path
 
