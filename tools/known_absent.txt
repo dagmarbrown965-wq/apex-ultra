@@ -1,0 +1,18 @@
+# Known-absent paths, for tools/check_record_integrity.py
+#
+# Format:  <repo-relative path> | <reason, with a pointer to the record>
+#
+# A path here is reported but does not fail the check. Everything NOT here
+# that is cited from docs/ and does not exist IS a failure. Adding a line
+# should be a deliberate act with a reason, not a way to silence the tool.
+#
+# Established 2026-11-16, after the Phase 48 close-out found several
+# citations in docs/ pointing at files that do not exist.
+
+tools/rest403_probe.py | A1 - the Phase 42.1 handoff accurately recorded it as Downloads-only and recommended committing it; that was never done and the file is now lost everywhere. Its finding (403 "Insufficient scopes") survives quoted verbatim. See docs/APEX_DEFERRED_FIXES.md
+
+docs/PHASE_42_1_BOUNDARY_AGREEMENT.md | A2 - never existed in git on any branch, never deleted, not on disk. Cited by the Phase 42.1 handoff as a "locked five-point agreement"; the five points are not recorded anywhere. Deliberately NOT reconstructed - writing one now would be a pre-registration composed in full knowledge of the results. See docs/APEX_DEFERRED_FIXES.md
+
+engine/output/candles_frxEURUSD_900_1754473235_1786008600.jsonl | I1 - the Phase 46 dataset, deleted 2026-11-16 by an advisor wildcard while clearing smoke-test artifacts. Not re-fetchable: its start epoch is past Deriv's 365-day history wall. Its summary is intact and committed; no SHA-256 was ever recorded for it. See docs/APEX_DEFERRED_FIXES.md
+
+engine/output/live_signals.jsonl | G.4 - the 253-byte CP4 stub, removed at 77f58e6. The M0 regression banner still prints a suggested command naming this path. Half-closed; the trap is defused but the banner is not. See docs/APEX_DEFERRED_FIXES.md
