@@ -53,25 +53,68 @@ reading rather than the docstring.
 
 ---
 
-# CONFIRMED ABSENT — the record asserts these exist
+# CONFIRMED ABSENT — both investigated and resolved 2026-11-16
 
-Both verified by `Test-Path` on 2026-11-16. Both returned **False**.
+## A1. `tools/rest403_probe.py` — **LOST. Record was accurate; the action was never taken.**
 
-## A1. `tools/rest403_probe.py`
+Not in the repo (`Test-Path` False), and **nothing matching `rest403*` anywhere
+under the old `Downloads\APEX_ULTRA` tree** (recursive search, 2026-11-16).
 
-Referenced in the record; not in the repo. Either never written, or written and
-lost. Note that `testing/diagnostics/deriv_rest_auth_probe.py` **does** exist and
-proved to be the right instrument for credential diagnosis on 2026-11-16 — it
-may be that the probe was built there and the record names a path that never
-existed.
+**The record did not overstate this** — an earlier version of this entry said it
+did, and that was wrong. `docs/APEX_HANDOFF_PHASE_42_1.md` states plainly:
+*"rest403_probe.py — standalone diagnostic (stdlib only, engine-free), currently
+ONLY in ~/Downloads. RECOMMENDED: copy into tools/ and commit; it proved its
+worth today."* The handoff was accurate and the recommendation was simply never
+carried out. The file has since been lost.
 
-## A2. `docs/PHASE_42_1_BOUNDARY_AGREEMENT.md`
+**Consequence.** This probe is the evidence base for the claim that Deriv offers
+no read-only scope and that the live token is therefore **trade-scoped by
+necessity** — the premise under which this project accepts a Trade-scoped
+credential at all, compensated by code guards. Its *finding* survives, quoted
+verbatim in the handoff: `403 "Insufficient scopes"` on
+`GET /trading/v1/options/accounts`. The means to reproduce it does not. If
+Deriv's scope behaviour ever changes, the check that established the premise
+cannot be re-run.
 
-**The more serious of the two.** A boundary agreement is the load-bearing
-artifact of a phase, and Phase 42.1 is the phase whose handoff this project's
-session context is built on. Establish whether Phase 42.1 ever had a written
-agreement or whether the record overstates it. If it never existed, say so in
-the record rather than leaving a citation pointing at nothing.
+`testing/diagnostics/deriv_rest_auth_probe.py` exists and is excellent for
+credential diagnosis, but it tests authorization, not scope refusal. It is not a
+substitute.
+
+**Recommended:** rewrite the scope probe and commit it, next time the token
+behaviour is being examined anyway.
+
+## A2. `docs/PHASE_42_1_BOUNDARY_AGREEMENT.md` — **NEVER EXISTED. Not recoverable.**
+
+Investigated 2026-11-16, four ways, all negative:
+
+| Check | Result |
+|---|---|
+| `Test-Path .\docs\PHASE_42_1_BOUNDARY_AGREEMENT.md` | False |
+| `git log --all -- docs/PHASE_42_1_BOUNDARY_AGREEMENT.md` | **empty** — never committed on any branch |
+| `git log --all --diff-filter=D -- "*PHASE_42_1*"` | **empty** — never deleted |
+| `Downloads\APEX_ULTRA\docs\` | Only `APP_COMPLETION_PLAN.md` and `ENGINE_MANIFEST.md`, both unrelated and months older |
+
+`docs/APEX_HANDOFF_PHASE_42_1.md:55` lists it under "What this phase added /
+changed" as *"locked five-point agreement."* **The handoff does not record what
+the five points were.** The substance is not preserved anywhere.
+
+**Telling detail:** `docs/PHASE_42_1_ADDENDUM.md`, listed two lines below it in
+the same section, **is** in the repo. One of the two was committed and the other
+left no trace in git, on disk, or in the old working directory. The likeliest
+reading is that the agreement was never written as a file and the handoff listed
+it aspirationally.
+
+**What this means.** Phase 42.1 has **no pre-registration document**. Its code is
+sound and independently verified — `_last_sign` probed HIT at `1a7848e`, CP3
+passes every session, the guards hold — but 42.1's *claims* are not checkable
+against a locked agreement the way Phases 46, 47 and 48's are. This is the phase
+whose handoff is this project's standing session context.
+
+**Not reconstructable, and should not be.** Writing a "boundary agreement" for
+Phase 42.1 now, from memory and after the fact, would be a pre-registration
+authored in full knowledge of the results — precisely the thing these documents
+exist to prevent. **The correct action is to amend the handoff to state that no
+agreement was committed**, and leave it at that.
 
 ---
 
