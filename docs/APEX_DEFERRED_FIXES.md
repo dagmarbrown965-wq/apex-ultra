@@ -182,11 +182,41 @@ Anyone sizing a future fetch should expect the delivered span to be
 `--days` plus up to one request window, and compute acceptance from the file's
 own epochs rather than from the requested interval.
 
+## N10. Loose duplicates of repo files in the former parent directory
+
+**Observed 2026-11-16** while moving the repo out of `Downloads`. The old parent
+`C:\Users\dagma\Downloads\APEX_ULTRA\` holds ~47 entries, including:
+
+- **`deriv_rest_auth_probe.py`** and **`rest_transport.py`** loose at the top
+  level — the exact filenames of `testing/diagnostics/deriv_rest_auth_probe.py`
+  and `infrastructure/broker/deriv/rest_transport.py`, the two files this
+  session relied on to diagnose the token failure and to establish the
+  `DERIV_APP_ID` trap. Today's commands ran from inside the repo, so Python
+  resolved the real modules — that was working-directory luck, not a guard.
+- A **browser re-download family**: `ApexV5_COMPLETE_1.jsx`, `_4`,
+  `..._TradeReview_1/_2/_3.jsx`, `..._HeatEngine_1.ts`,
+  `..._AdaptiveSizing_1.ts`, `APEX_ULTRA_EMA_RSI_1.xml`.
+- A **second `docs\` directory** at that level. This project's standard install
+  step is `Copy-Item $HOME\Downloads\<file> .\docs\<file>`, which lands
+  somewhere different depending on the working directory.
+
+**Same family as Section G.3**, the standing rule since the session002 incident
+that required deleting `Downloads\trading bot\files (80)\ema_cross.py` — G.3 is
+verified met, but the rule it encodes is not being applied generally. The
+deferred-fixes list already records this project being bitten once by a
+browser-saved duplicate (`screen_candidates (1).py`) being picked up instead of
+the intended file.
+
+**Not acted on.** Nothing was deleted; the repo was moved out instead, which
+removes the adjacency. Resolve by deciding what in that directory is still
+wanted, rather than by bulk deletion. Note `APEX_V6_demo_review_2026-11-16.md`
+there is dated the same day and its provenance is unestablished.
+
 ---
 
-# ESCALATED
+# ESCALATED / RESOLVED
 
-## E1. The repo lives under `C:\Users\dagma\Downloads\APEX_ULTRA\apex_ultra`
+## E1. Repo location — **DISCHARGED 2026-11-16**
 
 Section G.2 required the move **"before this phase generates new primary
 evidence."** Phase 48 has now generated the most important evidence this project
@@ -208,8 +238,25 @@ if either were lost both seals are void by their own terms.
 D1's hash had not been recomputed since 2026-08-19; it reproduced after 89 days,
 confirming D1's provenance is intact rather than assumed.
 
-**The move itself remains outstanding**, and a second copy in the same user
-profile is not off-machine redundancy.
+**Both halves completed later the same day.**
+
+**Off-machine redundancy.** The first backup attempt went to
+`$HOME\Documents\APEX_SEALED_DATA` — which resolves to the literal
+`C:\Users\dagma\Documents`, a local folder that is **not** the user's real
+Documents and is not synced. The real Documents is redirected to
+`C:\Users\dagma\OneDrive\Documentos`. Copies were made there and both hashes
+reproduced a third time. The sealed datasets now exist in three locations on two
+machines. Note that OneDrive Files On-Demand may dehydrate them into
+placeholders; they rehydrate on access and hash correctly, but a future check
+may pause to download.
+
+**Repo moved** to `C:\Users\dagma\APEX_ULTRA\apex_ultra`. Verified after the
+move: tree clean, up to date with `origin/main`, HEAD `a003511`, D2 hash
+`99A22CFC…52E49E` unchanged. Deliberately **not** inside `OneDrive\` — a sync
+client managing a live `.git` directory is its own corruption risk. The split is
+intentional: the backup benefits from sync, the repo does not.
+
+**Only the repo was moved**, not its former parent — see N10.
 
 ---
 

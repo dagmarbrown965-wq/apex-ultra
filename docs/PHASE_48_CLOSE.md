@@ -227,6 +227,34 @@ enforcing it between renewals.
 
 ---
 
+## Post-close addendum — 2026-11-16, same day
+
+**The verdict above is unchanged. This records what happened after it.**
+Section 5's breach finding stands as written: G.2 *was* breached, and the phase
+*did* generate its primary evidence under `Downloads`. That is a fact about the
+phase and is not revised by remedying it afterwards.
+
+**G.2 is now discharged.**
+
+- The repository was moved to `C:\Users\dagma\APEX_ULTRA\apex_ultra`. Verified
+  after the move: tree clean, up to date with `origin/main`, HEAD `a003511`, D2
+  hash `99A22CFC…52E49E` unchanged. Deliberately not inside `OneDrive\`.
+- Off-machine redundancy established at
+  `C:\Users\dagma\OneDrive\Documentos\APEX_SEALED_DATA\`, both hashes reproduced
+  a third time. An earlier copy to `$HOME\Documents` had landed in a local
+  folder that is not the user's redirected Documents and is not synced.
+
+Section 11's first recommendation is therefore complete. The rest stand.
+
+**One finding arose from the move**, recorded as N10 in
+`docs/APEX_DEFERRED_FIXES.md`: the former parent directory holds loose copies of
+`deriv_rest_auth_probe.py` and `rest_transport.py` — the two files this session
+depended on — plus a family of browser re-download duplicates and a second
+`docs\` directory. Same class as the Section G.3 rule. Today's commands resolved
+the correct modules only because they ran from inside the repo.
+
+---
+
 ## Decision log
 
 * **2026-11-16** — D2 fetched and sealed; Amendment v0.11 ratified before the
