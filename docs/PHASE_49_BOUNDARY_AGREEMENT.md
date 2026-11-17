@@ -1,15 +1,18 @@
-# PHASE 49 BOUNDARY AGREEMENT — v1.0 DRAFT
+# PHASE 49 BOUNDARY AGREEMENT — v1.0
 
-**STATUS: DRAFT. NOT RATIFIED. NOT AUTHORITATIVE.**
+**STATUS: AUTHORITATIVE on commit to `docs/` on `main`**, per the Phase 48 v1.0
+convention. Until that commit exists this document binds nothing, and no
+dataset may be opened, no statistic computed, and no implementation begun.
 
-*Becomes authoritative only when committed to `docs/` on `main`, per the Phase
-48 v1.0 convention. Until then no dataset may be opened, no statistic computed,
-and no implementation begun.*
+*Drafted 2026-11-16/17 as an explicitly incomplete document carrying
+`STATUS: DRAFT. NOT RATIFIED` while Sections B, D, E, F and G were outstanding.
+That status was removed only when every section was present and the Phase 45/46
+material was merged — not before, and not to make the document look finished.*
 
 *Sections A and C drafted 2026-11-16; Sections B, D, E, F and G drafted
-2026-11-17. **All sections are now present.** One item remains before
-ratification: the Phase 46 forbidden-response list must be read and merged into
-Section F.*
+2026-11-17, with the Phase 45/46 forbidden-response list and position policies
+merged the same day. **All sections are complete. This document is ready for
+ratification.** It becomes authoritative on commit to `docs/` on `main`.*
 
 **Versioning convention, stated explicitly because conventions differ across
 phases in this project and a tool now checks them:** this agreement is **v1.0**,
@@ -427,10 +430,13 @@ is tuned to avoid believing false ones.
 
 ## E.3 Secondary criteria — all must hold
 
-1. **Evaluable trade count.** `n >= 50` closed trades on the permitted region
+1. **Evaluable trade count.** `n >= 50` resolved signals on the permitted region
    of D2, carried forward from the Phase 47 sample-validity rule. Below ~100 the
    primary criterion becomes very demanding; a hypothesis expecting few trades
    should say so under Section C element 7 and accept that.
+
+   **Counted under the PRIMARY policy** — see E.3a, which defines what a trade
+   is and was previously left unspecified here.
 2. **Density consistent with pre-registration.** Observed trade count within
    **±50%** of the figure declared under Section C element 7. A strategy that
    predicted 100 trades and produced 12 is mis-specified, whatever its
@@ -441,6 +447,31 @@ is tuned to avoid believing false ones.
    on D2 does not proceed to pay for one.
 4. **Net expectancy positive after costs.** Implied by the primary criterion,
    stated separately so it cannot be lost.
+
+## E.3a What counts as a trade — position policies
+
+Carried unchanged from Phase 45 Amendment v0.2 via
+`docs/PHASE_46_BOUNDARY_AGREEMENT.md`. Reproduced because Section E's bar is
+meaningless without it, and an earlier draft of this section omitted it:
+
+> - **PRIMARY (decisive):** every resolved signal counted independently.
+>   Measures whether the SIGNAL has predictive value.
+> - **SECONDARY (indicative):** one position at a time, chronological.
+>   Executability check only; carries no pass/fail weight.
+>
+> If PRIMARY shows no edge, the strategy is dead regardless of execution. A
+> PRIMARY edge that SECONDARY cannot capture is a capacity finding and still
+> does not pass.
+
+**The E.2 primary criterion is evaluated on PRIMARY.** SECONDARY is computed and
+reported alongside it, and informs the position-sizing and density figures the
+funded evaluation depends on, but cannot rescue a PRIMARY failure and cannot by
+itself constitute a pass.
+
+**Consequence worth stating plainly:** a hypothesis whose signals overlap
+heavily may show a PRIMARY edge that SECONDARY cannot realise. Under Phase 45's
+rule that is a capacity finding and a **failure**, not a partial success. The
+economic floor at E.6 reaches the same conclusion by a different route.
 
 ## E.4 What a pass means, and does not
 
@@ -492,9 +523,44 @@ wants to kill it.
 
 # SECTION F — FORBIDDEN RESPONSES TO A RESULT
 
-Carried forward in spirit from Phase 46's forbidden-response list. **That list
-is to be read and merged into this section before ratification**; what follows
-is this phase's own additions and must not be treated as replacing it.
+## F.0 Carried forward from Phase 45 / Phase 46 — unchanged and binding
+
+`docs/PHASE_46_BOUNDARY_AGREEMENT.md` §"Forbidden responses to a negative
+result", itself carried unchanged from Phase 45. Reproduced verbatim:
+
+> - Changing the EMA periods and re-running.
+> - Changing the bracket ratio and re-running.
+> - Changing the timeframe and re-running.
+> - Switching to another currency pair and re-running.
+> - Filtering signals post hoc by score, regime, session, or time of day.
+
+**Generalised to Phase 49**, whose hypothesis is not yet known and may not
+involve EMAs or brackets at all. Forbidden in response to a negative result:
+
+- Changing **any pre-registered parameter** and re-running.
+- Changing the **timeframe** and re-running.
+- Changing the **instrument** and re-running.
+- **Post hoc filtering** of signals by score, regime, session, time of day, or
+  any partition not pre-registered.
+
+The specific items above are not superseded by the general ones; both bind.
+
+**Escalation, carried verbatim:** *"Any future work in a forbidden direction
+requires a new phase, a new agreement, and explicit CEO approval recorded in
+writing."*
+
+**The design-versus-reaction distinction, carried from Phase 46 and worth
+restating because it is the whole principle in one line:**
+
+> The 15-minute timeframe was chosen BEFORE any EUR/USD result existed, because
+> hourly bars would have produced only ~260 signals — a design decision, not a
+> reaction. Choosing a timeframe after seeing a result would be curve-fitting.
+> **The distinction is whether a result has been observed; none has.**
+
+Every choice this agreement requires to be fixed in advance is fixed for that
+reason, and for no other.
+
+## F.1 This phase's additions
 
 ## Forbidden after D2 is opened
 
@@ -597,11 +663,16 @@ systematic trading is the right vehicle for the goal it is meant to serve.
 
 ---
 
-# OUTSTANDING BEFORE RATIFICATION
+# RATIFICATION
 
-- **Merge the Phase 46 forbidden-response list into Section F.**
-  `docs/PHASE_46_BOUNDARY_AGREEMENT.md` and `docs/PHASE_46_CLOSE.md` carry it;
-  Section F currently states this phase's own additions only and explicitly
-  does not replace it.
+Nothing outstanding. All seven sections are complete, the Phase 45/46
+forbidden-response list is merged at F.0, and the Phase 45 position policies
+are merged at E.3a.
 
-**One item. Everything else is drafted.**
+**On commit to `docs/` on `main` this agreement is authoritative and the
+apparatus is frozen.** It is not reopened except on discovery of a genuine
+contradiction or a material defect — not for refinement, and not because a
+later candidate would be better served by a different bar.
+
+The next work is hypothesis generation under G.2: three sessions, two hours
+each, no data access.
