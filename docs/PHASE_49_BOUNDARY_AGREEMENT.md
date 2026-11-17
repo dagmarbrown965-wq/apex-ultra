@@ -6,8 +6,9 @@
 48 v1.0 convention. Until then no dataset may be opened, no statistic computed,
 and no implementation begun.*
 
-*Sections A and C drafted 2026-11-16. Sections B, D, E and F are outstanding;
-this document is incomplete by design and must not be ratified in this state.*
+*Sections A and C drafted 2026-11-16; Sections B and D drafted 2026-11-17.
+Sections E, F and G are outstanding; this document is incomplete by design and
+must not be ratified in this state.*
 
 **Versioning convention, stated explicitly because conventions differ across
 phases in this project and a tool now checks them:** this agreement is **v1.0**,
@@ -129,11 +130,91 @@ is a statement of intent and a commitment to criteria; it is not evidence.
 
 ---
 
-# SECTION C — LEGITIMATE HYPOTHESIS ORIGINS
+# SECTION B — DATASETS AND THE HOLDOUT PROTOCOL
 
-*Section B (holdout protocol and dataset handling) is outstanding. Section C is
-drafted first because it is the section that must exist before anyone thinks
-about a hypothesis, and because its content is independent of B.*
+Carried forward from the Phase 48 seals and Amendment v0.11. Nothing here is
+new policy; it is collected so that Phase 49 and Phase 50 operate from one
+statement rather than three documents.
+
+## The two datasets
+
+| | D1 | D2 |
+|---|---|---|
+| Role | In-sample | **Single-use holdout** |
+| File | `engine/output/candles_frxGBPJPY_900_1755657580_1787193000.jsonl` | `engine/output/candles_frxGBPJPY_900_1786039197_1794857400.jsonl` |
+| Bars | 24,257 | 6,748 |
+| Span | 364.993 d | 102.063 d |
+| SHA-256 | `E9DF6A4E2CDBBAAC8C9B738314E288E2AB006075768B9F0FA8904A521DEFEE39` | `99A22CFC24061C00591B0E8C63E1F99B8B5DDBBEBDAC7B8C1D588FA66952E49E` |
+| Seal | `docs/PHASE_48_D1_SEAL.md`, `1a7848e` | `docs/PHASE_48_D2_SEAL.md`, `f7a69cf` |
+
+Both are gitignored, so **git is not a backup of them.** Verified copies at
+`%USERPROFILE%\OneDrive\Documentos\APEX_SEALED_DATA\`.
+
+**If a hash cannot be reproduced, that dataset's provenance is void and it may
+not serve as a holdout.** Verify both before relying on either.
+
+## Mandatory exclusions
+
+1. **D2: exclude every bar with `epoch <= 1787193000`.** Amendment v0.11 Clause
+   5. D2 overlaps D1 by 13.354 days because the fetch tool walks backward from
+   `latest` and overshoots by up to one request window. Without this exclusion
+   the overlap silently reintroduces sealed in-sample material into the holdout.
+2. **Exclude the first bar of each dataset.** Both are clipped off the
+   900-second boundary — D1 by 320 s, D2 by 897 s — systematic across all four
+   project fetches.
+
+**Effective evaluable bars in D2 are therefore fewer than 6,748.** The exact
+figure requires counting bars above the exclusion epoch, which requires opening
+the file and therefore a committed script; it is determined and reported at
+evaluation time in Phase 50. Arithmetic over published summary figures puts the
+estimate near **5,860 bars over 88.708 forward days**. Sufficiency rests on
+trade density, not bar count — see Section E.
+
+## The D1/D2 firewall during Phase 49
+
+**Phase 49 does not open D2 at all.** Not to count bars, not to check the
+exclusion, not to confirm the hash beyond the file-level SHA-256 already
+recorded. Only `docs/PHASE_48_D2_SEAL.md` and the committed summary are
+readable.
+
+**Phase 49 does not open D1 until the pre-registration is committed to `main`.**
+Section A's interpretive resolution governs; Section D sets what happens after.
+
+## What "spent" means
+
+**D2 is evaluated once.** One hypothesis, one frozen configuration, one run, in
+Phase 50. After that evaluation D2 is spent — **whatever the outcome.** A pass
+does not earn a second look and a failure does not earn a retry.
+
+**A run that produces any evaluable output is a use**, even if the
+implementation is afterwards found defective. This is deliberate and is the
+clause most likely to be resented later: without it, "the script had a bug, let
+us fix it and re-run" becomes an unlimited number of attempts at the holdout,
+each one looking principled.
+
+**A run that fails before producing any statistic is not a use** — a crash, an
+authentication failure, an empty read. The distinction is whether a number
+about D2 was produced and seen, not whether anyone intended to see it.
+
+If a defect is found after a use, the finding stands as recorded and the defect
+is disclosed alongside it. D2 does not reset.
+
+## Audit trail — enforced unread
+
+1. **Any script that reads either sealed file must be committed to `main`
+   before it is executed.** Git history is the complete log of everything that
+   has touched the data.
+2. The pre-registration **cites the SHA-256** of each dataset it will use and
+   states the commit range within which no reading script was committed.
+3. Only summaries are readable before a dataset is legitimately opened.
+
+This cannot make cheating impossible on a single-operator machine. It makes
+cheating require a deliberate, documented act of omission rather than a moment
+of curiosity.
+
+---
+
+# SECTION C — LEGITIMATE HYPOTHESIS ORIGINS
 
 ## Permitted origins — exhaustive
 
@@ -222,17 +303,83 @@ outcome. D2 remains unspent and available to a later phase that has one.
 
 ---
 
+# SECTION D — IN-SAMPLE DISCIPLINE ON D1
+
+## When D1 opens
+
+Only when **both** hold:
+
+1. The hypothesis statement has passed Section C admissibility review, and
+2. The pre-registration — hypothesis, frozen configuration rule, parameter
+   bounds, falsification criteria — is **committed to `main`**.
+
+Committed, not drafted. A pre-registration that exists only in a chat, or only
+in the Claude project mirror, does not exist. Three documents were found in
+exactly that state on 2026-11-16; see `docs/APEX_DEFERRED_FIXES.md` N12.
+
+## What D1 is for
+
+Implementation, parameter estimation within pre-registered bounds, sanity
+checks, and debugging. This is what in-sample material is for and the
+forbidden-statistics list no longer binds once pre-registration is complete —
+backtesting D1 is the point.
+
+## Parameter bounds are declared before D1 opens
+
+If the hypothesis has free parameters, **their ranges and the rule for choosing
+among them are written into the pre-registration**, before D1 is examined.
+Selection within declared bounds is permitted on D1 and is disclosed. Selection
+of the bounds themselves from D1 is not: that is hypothesis discovery wearing a
+different hat, and Section A's resolution forbids it.
+
+**EmaCross stays 9/21.** Standing project rule, unchanged. More generally, a
+re-tuned rejected hypothesis is inadmissible under Section C regardless of what
+D1 shows.
+
+## Iteration is permitted and counted
+
+There is **no limit** on how many configurations are tried on D1. Unlimited
+iteration against in-sample data is legitimate — that is what makes it
+in-sample — **provided the count is disclosed.**
+
+The pre-registration handed to Phase 50 therefore records:
+
+- how many distinct configurations were evaluated on D1,
+- how many distinct hypotheses-in-spirit were explored, if more than one
+  survived Section C,
+- and the in-sample result of the configuration finally chosen.
+
+The discipline is disclosure, not restraint. A configuration chosen from two
+hundred attempts may still be real; a configuration chosen from two hundred
+attempts and reported as though it were the first is not assessable at all.
+Phase 47 is the precedent worth remembering: a strategy returning +37.66R at PF
+1.15 in-sample that the holdout correctly rejected.
+
+## The configuration is frozen before Phase 50
+
+Whatever D1 work produces, the exact rule handed to Phase 50 is **frozen and
+committed** — stated precisely enough that two implementers produce identical
+signals, with every parameter fixed to a value.
+
+**No parameter may be chosen, adjusted, or reinterpreted after D2 is opened.**
+Any ambiguity discovered at evaluation time is resolved against the hypothesis,
+not in its favour, and the ambiguity is recorded as a defect in the
+pre-registration.
+
+## D1's status afterwards
+
+**D1 is spent as in-sample the moment it is opened.** It can never serve as a
+holdout for any hypothesis, including a different one. This is not a new
+restriction — it is what in-sample means — but it is stated so that a later
+phase does not propose reusing D1 as clean data.
+
+---
+
 # OUTSTANDING — not yet drafted
 
-- **Section B** — holdout protocol, dataset handling, the `epoch <= 1787193000`
-  exclusion, the clipped first bar of each dataset, commit-before-read, hash
-  citation, and the D1/D2 firewall during Phase 49.
-- **Section D** — in-sample discipline on D1 once pre-registration is complete:
-  what fitting is permitted, what is forbidden, and how parameter bounds are
-  declared in advance.
 - **Section E** — acceptance criteria, sample sufficiency, the n ≥ 50 evaluable
   tier, and the pass bar. Fixed before Phase 50 opens.
 - **Section F** — forbidden responses to a result, carried from Phase 46.
 - **Section G** — operational preconditions and work items.
 
-**This agreement must not be ratified until B, D, E and F exist.**
+**This agreement must not be ratified until E, F and G exist.**
