@@ -63,7 +63,10 @@ recomputed before E.5's position size is fixed.
 
 | Item | Answer | Notes |
 |---|---|---|
-| EAs / automated trading permitted | | **In writing. Keep the email.** |
+| **1. Tool** — EA / automated execution permitted | | **In writing. Keep the email.** |
+| **2. Behaviour** — proposed strategy's behaviours permitted | | Describe frequency, holding time, entries and exits. See the HFT and tick-scalping rows below, which feed this answer |
+| **3. Payout** — profits from this EA-generated strategy payout-eligible | | **Explicit** written confirmation, not inferred from 1 or 2 |
+| Applicable rule clauses named by support | | **Ask support to cite the clauses.** A representative's reassurance does not override contradictory contractual terms |
 | Drawdown type | | Static / trailing |
 | Maximum drawdown % | | |
 | Daily loss limit % | | |
@@ -81,10 +84,14 @@ recomputed before E.5's position size is fixed.
 | Copy trading rules | | |
 | Weekend / overnight holding permitted | | Relevant if a candidate holds positions |
 
-**Industry baseline for judging answers**, from the Equity Edge survey: targets
-8–10%, daily limits 3–5%, maximum drawdown 5–10%, splits 80–90%, 2–3 minimum
-trading days, evaluation time limits often unlimited. Better or worse than that
-is the useful comparison.
+**One-firm reference point — NOT an industry standard.** From the Equity Edge
+survey only: targets 8–10%, daily limits 3–5%, maximum drawdown 5–10%, splits
+80–90%, 2–3 minimum trading days, evaluation time limits often unlimited.
+
+This is a single firm's terms, surveyed once. It is useful for judging whether
+another firm's offer is better or worse *than Equity Edge's*, and for nothing
+more. It has not been checked against any sample of the sector and must not be
+cited as what the industry typically offers.
 
 ## B — Counterparty risk
 
