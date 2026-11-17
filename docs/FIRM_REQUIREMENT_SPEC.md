@@ -19,7 +19,7 @@ Everything else is secondary. If these five don't clear, stop.
 
 | # | Question | Disqualifying answer |
 |---|---|---|
-| 1 | **Are Expert Advisors / automated strategies permitted?** Confirmed in writing by support, not inferred from a rules page. | No, or unclear |
+| 1 | **Automation permitted at all three levels — see 1a.** Confirmed in writing by support, not inferred from a rules page. | No, or unclear, at any one of the three |
 | 2 | **Is the maximum drawdown static or trailing?** | Trailing is not disqualifying but is materially harder — see note below |
 | 3 | **What is the daily loss limit, and what is it calculated from?** Starting balance, previous close, or equity high | A limit tight enough that normal variance at 0.5% risk breaches it |
 | 4 | **Profit split, and cost per attempt** | — |
@@ -32,6 +32,24 @@ closure."* That was read from their rules page by an agent, not confirmed by
 their support, and should be put to them directly before the account is written
 off. Manual execution of the bot's signals remains permitted there and at ~35
 trades/month is feasible, so the account is not worthless.
+
+### 1a — Automation has three levels, and a firm can pass one while failing another
+
+| Level | What to confirm in writing |
+|---|---|
+| **Tool** | Are Expert Advisors permitted? Are **custom-built** EAs permitted? |
+| **Behaviour** | Are automated entries and exits permitted? Restrictions on trade frequency, holding time or strategy type? Any **minimum average trade duration**? |
+| **Payout** | Can profits generated **by that specific behaviour** qualify for withdrawal? |
+
+**Permission to use the tool is not permission for what the tool does.** Equity
+Edge's prohibited-practice list — high-frequency trading, tick scalping,
+latency arbitrage, toxic flow — would bite a strategy at the frequency the
+economics keep pointing toward, even at a firm that welcomes automation. The
+written confirmation must name the prohibited practices, any minimum trade
+duration, frequency limits and payout eligibility explicitly.
+
+**A firm that permits EAs but reserves the right to void payouts for particular
+EA behaviour is not a suitable counterparty.**
 
 **On trailing drawdown:** a floor that follows the equity high-water mark means
 early profit raises the level you can be stopped out at. The simulations in
