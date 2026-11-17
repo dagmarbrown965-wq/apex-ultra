@@ -6,9 +6,10 @@
 48 v1.0 convention. Until then no dataset may be opened, no statistic computed,
 and no implementation begun.*
 
-*Sections A and C drafted 2026-11-16; Sections B and D drafted 2026-11-17.
-Sections E, F and G are outstanding; this document is incomplete by design and
-must not be ratified in this state.*
+*Sections A and C drafted 2026-11-16; Sections B, D, E, F and G drafted
+2026-11-17. **All sections are now present.** One item remains before
+ratification: the Phase 46 forbidden-response list must be read and merged into
+Section F.*
 
 **Versioning convention, stated explicitly because conventions differ across
 phases in this project and a tool now checks them:** this agreement is **v1.0**,
@@ -375,11 +376,232 @@ phase does not propose reusing D1 as clean data.
 
 ---
 
-# OUTSTANDING — not yet drafted
+# SECTION E — ACCEPTANCE CRITERIA
 
-- **Section E** — acceptance criteria, sample sufficiency, the n ≥ 50 evaluable
-  tier, and the pass bar. Fixed before Phase 50 opens.
-- **Section F** — forbidden responses to a result, carried from Phase 46.
-- **Section G** — operational preconditions and work items.
+**Fixed before any hypothesis exists.** This is the point of the section. A bar
+written after a candidate is in mind bends to fit it, usually without anyone
+intending it to.
 
-**This agreement must not be ratified until E, F and G exist.**
+## E.1 The division of labour
+
+Two tests, with different jobs. Conflating them is the error this section
+exists to prevent.
+
+| | **D2 — screening** | **Funded evaluation — confirming** |
+|---|---|---|
+| Job | Reject strategies an edgeless process would rarely produce | Establish that an edge is real |
+| Sample | ~103 trades expected | Hundreds, over months |
+| Verdict on passing | **"not rejected"** | "evidence of an edge" |
+| Evidence strength | ~2–5× likelihood ratio | ~8× at minimum position size |
+| Cost of a wrong pass | Proceed to a paid evaluation | Lose a funded account |
+
+**D2 cannot establish an edge and Section E does not ask it to.** At ~103
+trades the standard error of the win rate is 4.9 pp; a true 57.5% strategy is
+statistically indistinguishable from break-even. Establishing a 57.5% edge
+requires ~341 trades. See `docs/PHASE_49_ECONOMIC_FLOOR.md`.
+
+## E.2 The D2 bar
+
+Expressed as expectancy rather than win rate, because reward:risk is not known
+until a hypothesis exists and a win rate means nothing without it.
+
+**Primary criterion.** Against a null hypothesis of **zero net expectancy after
+modelled costs**:
+
+```
+t = mean(R_net) / ( sd(R_net) / sqrt(n) )     must be  >= 1.282
+```
+
+one-sided, i.e. **a false-pass rate of 10%** on an edgeless strategy. At n ≈ 103
+this corresponds to an observed net expectancy of roughly **0.126R per trade**.
+
+`R_net` is per-trade return in units of the pre-registered stop, **after**
+subtracting modelled spread and commission. The cost model is declared in the
+pre-registration and **may not be changed after D2 is opened.**
+
+**Why 10% and not 5%.** A 5% bar demands ~0.16R and would reject roughly three
+quarters of genuinely good strategies at this sample size. A 10% bar admits one
+edgeless strategy in ten, which the confirming test is there to catch. The
+screening test is tuned to avoid discarding real candidates; the confirming test
+is tuned to avoid believing false ones.
+
+## E.3 Secondary criteria — all must hold
+
+1. **Evaluable trade count.** `n >= 50` closed trades on the permitted region
+   of D2, carried forward from the Phase 47 sample-validity rule. Below ~100 the
+   primary criterion becomes very demanding; a hypothesis expecting few trades
+   should say so under Section C element 7 and accept that.
+2. **Density consistent with pre-registration.** Observed trade count within
+   **±50%** of the figure declared under Section C element 7. A strategy that
+   predicted 100 trades and produced 12 is mis-specified, whatever its
+   expectancy — the pre-registration did not describe the thing that ran.
+3. **Survivable drawdown.** The D2 equity curve, at the position size intended
+   for the funded evaluation, must not breach the intended firm's **daily** or
+   **maximum** drawdown limits. A strategy that would have failed the evaluation
+   on D2 does not proceed to pay for one.
+4. **Net expectancy positive after costs.** Implied by the primary criterion,
+   stated separately so it cannot be lost.
+
+## E.4 What a pass means, and does not
+
+**A D2 pass licenses one thing: proceeding to a funded evaluation at the
+pre-registered position size.** It is not evidence of profitability, it is not a
+result, and it may not be described as one in any document, commit message or
+summary.
+
+The permitted form of words is **"not rejected by D2"**. The forms
+"validated", "confirmed", "proven" and "works" are forbidden, for the reason
+Phase 47 demonstrated: a strategy showing +37.66R at PF 1.15 in-sample had no
+edge whatsoever, and the language used about a result shapes what gets risked
+against it.
+
+## E.5 The confirming test — conditions fixed in advance
+
+Fixed here so they cannot be loosened later to make a marginal candidate
+proceed:
+
+1. **Position size at the minimum the firm permits**, and no more than **0.5%
+   of account per trade.** This is not caution — it is measurement. At 0.5% a
+   real edge passes ~93% of the time and an edgeless one ~11%, an evidence ratio
+   of **8.3×**; at 1.0% the ratio collapses to 3.1×. Sizing up to pass faster
+   destroys the information the test exists to produce.
+2. **The firm must permit automated execution**, confirmed in writing before any
+   attempt. Equity Edge prohibits Expert Advisors and trade copiers outright;
+   the firm used must not.
+3. **Static drawdown preferred over trailing**, and the firm's actual target,
+   daily limit and maximum limit recorded in the pre-registration before the
+   attempt.
+4. **The configuration is frozen.** Identical to the one evaluated on D2. No
+   parameter is chosen, adjusted or reinterpreted between the two tests.
+
+## E.6 Economic floor
+
+A strategy that is statistically real but economically trivial **fails**.
+
+Before the evaluation attempt, the pre-registration states expected monthly
+return at the pre-registered position size and trade density, and the capital
+required to produce income that matters. If that calculation shows the strategy
+cannot pay at any accessible account size, Phase 50 does not proceed regardless
+of the D2 result.
+
+This is written now, before a candidate exists, precisely because it will be
+unwelcome later when something squeaks over the statistical line and nobody
+wants to kill it.
+
+---
+
+# SECTION F — FORBIDDEN RESPONSES TO A RESULT
+
+Carried forward in spirit from Phase 46's forbidden-response list. **That list
+is to be read and merged into this section before ratification**; what follows
+is this phase's own additions and must not be treated as replacing it.
+
+## Forbidden after D2 is opened
+
+1. **Any second use of D2.** It is spent on first evaluable output, whatever the
+   outcome. See Section B.
+2. **Re-running with altered parameters.** Including parameters the
+   pre-registration left ambiguous — ambiguity resolves **against** the
+   hypothesis, per Section D.
+3. **Changing the cost model.** Spread, commission and slippage assumptions are
+   fixed in the pre-registration.
+4. **Reporting a favourable subset.** By date range, session, volatility
+   regime, or any other partition not pre-registered.
+5. **Reclassifying a failure as inconclusive** in order to test again.
+6. **Extending the dataset** to obtain more trades after seeing a near-miss.
+7. **Attributing failure to regime** and re-testing on a different window. If
+   regime-dependence is part of the hypothesis it is pre-registered as such.
+8. **Proceeding to a funded evaluation on a failed D2.**
+9. **Describing a D2 pass as validation.** See E.4.
+
+## Permitted after a failure
+
+- Record the result, the configuration, and the in-sample/out-of-sample gap.
+- Close the hypothesis.
+- Form a **genuinely new** hypothesis under Section C, for a future phase, on
+  data that does not yet exist. A new hypothesis is not the old one with
+  different parameters — Section C already forbids that.
+
+## The standing precedent
+
+Phase 47 recorded a strategy at **+37.66R, PF 1.15 in-sample**, rejected by
+106 holdout trades. The record of that rejection is worth more to this project
+than the strategy would have been. A failure correctly recorded is the normal
+and successful output of this process.
+
+---
+
+# SECTION G — PRECONDITIONS, WORK ITEMS, STOPPING RULE
+
+## G.1 Session preconditions
+
+Every Phase 49 session opens with `docs/SESSION_CHECKLIST.md` items 1 and 2:
+clean tree, M0 PASS (3/3), CP3 PASS, `_last_sign` HIT, and
+`py -m tools.check_record_integrity` PASS.
+
+## G.2 Hypothesis generation protocol
+
+**Bounded in advance, and the bound is not extended because the process has not
+yet produced the answer hoped for.**
+
+| | |
+|---|---|
+| Sessions | **3**, dedicated |
+| Duration | **2 hours** maximum each |
+| Data access | **None.** No D1, no D2, no statistical exploration, no implementation, no backtesting |
+| Output per candidate | The seven-element statement of Section C |
+| Review | Section C admissibility, before any pre-registration is written |
+
+Every candidate considered is recorded with its outcome, including rejections.
+A record showing only an eventual winner is defective — the Phase 48 screening
+precedent.
+
+## G.3 Work items
+
+| ID | Work | Gate |
+|---|---|---|
+| W49.0 | Ratify this agreement, E/F/G complete, Phase 46 forbidden-response list merged | — |
+| W49.1 | Firm requirement spec: rules compatibility and counterparty risk | Section E.5 |
+| W49.2 | Hypothesis generation, 3 sessions | Section C |
+| W49.3 | Admissibility review of each candidate | Section C |
+| W49.4 | Pre-registration of the surviving hypothesis, committed to `main` | Sections C, D, E |
+| W49.5 | D1 opened; implementation and in-sample development; iteration count disclosed | Section D |
+| W49.6 | Configuration frozen and committed; Phase 49 closes | Section D |
+
+**D2 is not opened in Phase 49 under any circumstance.**
+
+## G.4 Stopping rule
+
+**If no candidate satisfies Section C within the three sessions, Phase 49 closes
+with the finding "No admissible hypothesis found."**
+
+This outcome is accepted in advance. It is a complete and legitimate result, not
+a failure of the phase, and **the deadline is not extended because the process
+has not produced the answer hoped for.** D2 remains unspent and available to a
+later phase that has a candidate.
+
+### What that outcome would and would not establish
+
+**It would establish:** that this research process, under these origin
+constraints and within this agreed effort, did not produce a defensible
+candidate.
+
+**It would NOT establish** that systematic trading cannot work, that no edge
+exists in this instrument, or that the project's method is wrong. The claim is
+bounded to the process and its limits, and must be stated that way in the close
+document.
+
+What follows such a close is a separate decision, taken outside this agreement:
+whether to run the process again with different origin constraints, or whether
+systematic trading is the right vehicle for the goal it is meant to serve.
+
+---
+
+# OUTSTANDING BEFORE RATIFICATION
+
+- **Merge the Phase 46 forbidden-response list into Section F.**
+  `docs/PHASE_46_BOUNDARY_AGREEMENT.md` and `docs/PHASE_46_CLOSE.md` carry it;
+  Section F currently states this phase's own additions only and explicitly
+  does not replace it.
+
+**One item. Everything else is drafted.**
