@@ -25,13 +25,19 @@ Everything else is secondary. If these five don't clear, stop.
 | 4 | **Profit split, and cost per attempt** | — |
 | 5 | **Is there a verifiable payout record?** | No evidence of payouts to real traders |
 
-**Question 1 is the hard disqualifier.** Equity Edge — the firm currently held —
-**fails it**: its published rules state EA and trade-copier use *"is not
-permitted and will lead to evaluation denial, payout denial, and account
-closure."* That was read from their rules page by an agent, not confirmed by
-their support, and should be put to them directly before the account is written
-off. Manual execution of the bot's signals remains permitted there and at ~35
-trades/month is feasible, so the account is not worthless.
+**Question 1 is the hard disqualifier.** Equity Edge — the firm currently held
+— **fails it, confirmed by support in writing on 2026-11-18**: *"Using an EA is
+strictly prohibited."* Their published rules say the same, and support further
+confirmed that *"The prohibited strategies rules apply to all account types"*,
+so funded and Qualified Trader accounts are covered by the prohibition.
+**Equity Edge is disqualified for an EA-based strategy.**
+
+Whether a program used **only to generate signals**, with every trade reviewed
+and placed manually, counts as EA use was asked directly and **was not
+answered**. Until it is, the manual-execution fallback is **unresolved and must
+not be treated as permitted.** An earlier draft of this document asserted that
+manual execution remained permitted there; that assertion was never verified
+and has been withdrawn.
 
 ### 1a — Automation has three levels, and a firm can pass one while failing another
 
@@ -61,28 +67,47 @@ recomputed before E.5's position size is fixed.
 
 ## A — Rules compatibility
 
+**The answers below are Equity Edge's, recorded 2026-11-18.** For any other
+firm, copy this file and clear the answer column; do not overwrite these.
+
 | Item | Answer | Notes |
 |---|---|---|
-| **1. Tool** — EA / automated execution permitted | | **In writing. Keep the email.** |
-| **2. Behaviour** — proposed strategy's behaviours permitted | | Describe frequency, holding time, entries and exits. See the HFT and tick-scalping rows below, which feed this answer |
-| **3. Payout** — profits from this EA-generated strategy payout-eligible | | **Explicit** written confirmation, not inferred from 1 or 2 |
-| Applicable rule clauses named by support | | **Ask support to cite the clauses.** A representative's reassurance does not override contradictory contractual terms |
-| Drawdown type | | Static / trailing |
-| Maximum drawdown % | | |
-| Daily loss limit % | | |
-| Daily limit basis | | Starting balance / previous close / equity high |
-| Daily limit reset time | | |
-| Phase 1 profit target % | | |
-| Phase 2 profit target %, if any | | |
-| Minimum trading days | | |
-| Time limit on evaluation | | Unlimited is a genuine advantage |
-| High-frequency trading restrictions | | Relevant if a candidate needs density |
-| Tick scalping / minimum trade duration | | |
-| News trading windows | | Width, and whether profits are clawed back |
-| Hedging permitted | | |
-| Consistency rule | | e.g. best day capped at X% of total profit |
-| Copy trading rules | | |
-| Weekend / overnight holding permitted | | Relevant if a candidate holds positions |
+| **1. Tool** — EA / automated execution permitted | **NO** — *"Using an EA is strictly prohibited"*, support, 2026-11-18 | **In writing. Keep the email.** |
+| **2. Behaviour** — proposed strategy's behaviours permitted | **Declined** — no advance review available | Describe frequency, holding time, entries and exits. See the HFT and tick-scalping rows below, which feed this answer |
+| **3. Payout** — profits from this EA-generated strategy payout-eligible | **Declined** — reviews occur only after a challenge is passed or a payout requested | **Explicit** written confirmation, not inferred from 1 or 2 |
+| Applicable rule clauses named by support | **None.** No clause was cited for any answer | **Ask support to cite the clauses.** A representative's reassurance does not override contradictory contractual terms |
+| Drawdown type | not reached | Static / trailing |
+| Maximum drawdown % | not reached | |
+| Daily loss limit % | not reached | |
+| Daily limit basis | not reached | Starting balance / previous close / equity high |
+| Daily limit reset time | not reached | |
+| Phase 1 profit target % | not reached | |
+| Phase 2 profit target %, if any | not reached | |
+| Minimum trading days | not reached | |
+| Time limit on evaluation | not reached | Unlimited is a genuine advantage |
+| High-frequency trading restrictions | prohibited, Trading Rules §3 | Relevant if a candidate needs density |
+| Tick scalping / minimum trade duration | prohibited; **2-minute average** trade duration rule applies to all phases of Swift, Legacy and Instant; Flagship evaluation exempt | |
+| News trading windows | 2 min either side (Legacy/Swift funded), 5 min (Flagship funded), 8 min (Instant); profits deducted | Width, and whether profits are clawed back |
+| Hedging permitted | **No** — *"payout rejection and may also results in account termination"* | |
+| Consistency rule | not reached | e.g. best day capped at X% of total profit |
+| Copy trading rules | max two Challenge accounts; prohibited on Instant | |
+| Weekend / overnight holding permitted | gap-trading restriction applies in the final two hours before close | Relevant if a candidate holds positions |
+
+Rows marked *not reached* were never asked: Question 1 disqualified the firm
+before the economic terms mattered. They are not unanswered, they are moot.
+
+### Verification record — Equity Edge
+
+| | |
+|---|---|
+| Enquiry sent | 2026-11-17, `support@equityedge.io`, four numbered questions |
+| Reply received | 2026-11-18 05:41 UTC, Hillary, Customer Support Representative |
+| Confirmed, verbatim | *"Using an EA is strictly prohibited."* |
+| Confirmed, verbatim | *"The prohibited strategies rules apply to all account types."* |
+| Declined | Advance review of any strategy, trade or account — see Section B |
+| Not answered | Q1 signal-generation-only with manual execution; Q2 its payout eligibility; Q3 whether the stated profile engages any prohibited practice |
+| Clauses cited | **None**, for any answer |
+| Outstanding | One follow-up sent 2026-11-18 asking Q1 alone, as a yes/no. Per standing decision, no further questions if it goes unanswered |
 
 **One-firm reference point — NOT an industry standard.** From the Equity Edge
 survey only: targets 8–10%, daily limits 3–5%, maximum drawdown 5–10%, splits
@@ -100,13 +125,23 @@ that does.**
 
 | Item | Answer |
 |---|---|
-| Legal entity and jurisdiction | |
-| Years operating under that entity | |
-| Verifiable payout evidence — not testimonials | |
-| Who holds the money | |
-| Is the execution broker regulated, and where | |
-| What happens to funded accounts if the firm fails | |
-| Any regulatory action against the firm or its principals | |
+| Legal entity and jurisdiction | Equity Edge Ltd, Saint Lucia |
+| Years operating under that entity | not established |
+| Verifiable payout evidence — not testimonials | not established; marketing claims only |
+| Who holds the money | not established |
+| Is the execution broker regulated, and where | not established |
+| What happens to funded accounts if the firm fails | not established |
+| Any regulatory action against the firm or its principals | not established |
+| **Advance clearance available before an attempt** | **No.** Support, 2026-11-18: *"we are unable to review trades or accounts directly. Reviews are conducted exclusively by the Trade Review Team after a challenge has been passed or a payout request has been submitted."* |
+
+**The advance-clearance finding is a counterparty finding, not a rules
+finding.** Compliance judgement is applied only after the fee is paid, the work
+is done and the money is requested. No strategy question can be settled before
+committing. Combined with Terms §6 — payouts *"may be declined in cases of
+suspected rule breaches, location discrepancies, or strategy manipulation"* —
+and §10's *"Decisions are final"*, the trader carries the whole interpretive
+risk. **Ask every future firm whether advance clearance exists; treat its
+absence as a material defect, not an administrative detail.**
 
 This section exists because the prop sector has a documented history of firms
 closing or being restricted by regulators, sometimes with traders' balances
@@ -117,13 +152,13 @@ doesn't.
 
 | Item | Answer |
 |---|---|
-| Profit split % | |
-| Cost per attempt | |
-| Is the fee refunded on passing | |
-| Account sizes offered | |
-| Payout frequency and minimum | |
-| Scaling terms | |
-| Maximum allocation | |
+| Profit split % | not reached |
+| Cost per attempt | not reached |
+| Is the fee refunded on passing | not reached |
+| Account sizes offered | not reached |
+| Payout frequency and minimum | not reached |
+| Scaling terms | not reached |
+| Maximum allocation | not reached |
 
 Feeds the economic floor: `docs/PHASE_49_ECONOMIC_FLOOR.md` values a funded
 account at roughly 12 months of split profit, which is the figure that decides
@@ -150,6 +185,10 @@ whether an attempt is rational.
 **Record the chosen firm's actual numbers into the Phase 50 pre-registration
 before any attempt**, per E.5. Rules discovered after a strategy is frozen
 cannot be used to adjust it.
+
+**Equity Edge fails disqualifier 1 on both limbs** — EAs are not permitted, and
+the firm declined to answer the behaviour and payout questions in writing.
+Consideration ends there.
 
 ---
 
