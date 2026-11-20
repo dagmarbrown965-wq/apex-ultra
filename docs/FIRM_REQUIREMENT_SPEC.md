@@ -33,9 +33,11 @@ so funded and Qualified Trader accounts are covered by the prohibition.
 **Equity Edge is disqualified for an EA-based strategy.**
 
 Whether a program used **only to generate signals**, with every trade reviewed
-and placed manually, counts as EA use was asked directly and **was not
-answered**. Until it is, the manual-execution fallback is **unresolved and must
-not be treated as permitted.** An earlier draft of this document asserted that
+and placed manually, counts as EA use was asked directly and **answered on
+2026-11-19**: *"Please be advised that the use of EAs is not permitted, even if
+the trades are executed manually."* The manual-execution fallback is therefore
+**not permitted**, and the enquiry is closed. An earlier draft of this document
+asserted that
 manual execution remained permitted there; that assertion was never verified
 and has been withdrawn.
 
@@ -72,7 +74,7 @@ firm, copy this file and clear the answer column; do not overwrite these.
 
 | Item | Answer | Notes |
 |---|---|---|
-| **1. Tool** — EA / automated execution permitted | **NO** — *"Using an EA is strictly prohibited"*, support, 2026-11-18 | **In writing. Keep the email.** |
+| **1. Tool** — EA / automated execution permitted | **NO.** *"Using an EA is strictly prohibited"* (2026-11-18), and *"the use of EAs is not permitted, even if the trades are executed manually"* (2026-11-19). **Both automated execution and EA-generated signals followed by manual execution are prohibited.** | **In writing. Keep the email.** |
 | **2. Behaviour** — proposed strategy's behaviours permitted | **Declined** — no advance review available | Describe frequency, holding time, entries and exits. See the HFT and tick-scalping rows below, which feed this answer |
 | **3. Payout** — profits from this EA-generated strategy payout-eligible | **Declined** — reviews occur only after a challenge is passed or a payout requested | **Explicit** written confirmation, not inferred from 1 or 2 |
 | Applicable rule clauses named by support | **None.** No clause was cited for any answer | **Ask support to cite the clauses.** A representative's reassurance does not override contradictory contractual terms |
@@ -104,10 +106,11 @@ before the economic terms mattered. They are not unanswered, they are moot.
 | Reply received | 2026-11-18 05:41 UTC, Hillary, Customer Support Representative |
 | Confirmed, verbatim | *"Using an EA is strictly prohibited."* |
 | Confirmed, verbatim | *"The prohibited strategies rules apply to all account types."* |
+| Confirmed, verbatim, 2026-11-19 | *"Please be advised that the use of EAs is not permitted, even if the trades are executed manually."* |
 | Declined | Advance review of any strategy, trade or account — see Section B |
-| Not answered | Q1 signal-generation-only with manual execution; Q2 its payout eligibility; Q3 whether the stated profile engages any prohibited practice |
+| Not answered | Q2 payout eligibility for signal-only use; Q3 whether the stated profile engages any prohibited practice |
 | Clauses cited | **None**, for any answer |
-| Outstanding | One follow-up sent 2026-11-18 asking Q1 alone, as a yes/no. Per standing decision, no further questions if it goes unanswered |
+| Outstanding | **None — enquiry closed 2026-11-19** |
 
 **One-firm reference point — NOT an industry standard.** From the Equity Edge
 survey only: targets 8–10%, daily limits 3–5%, maximum drawdown 5–10%, splits
