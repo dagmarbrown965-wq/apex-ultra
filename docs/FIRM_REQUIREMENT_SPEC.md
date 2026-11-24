@@ -41,6 +41,31 @@ asserted that
 manual execution remained permitted there; that assertion was never verified
 and has been withdrawn.
 
+**The5ers also fails Question 1 — on the behaviour level, and on the tool
+level under an unresolved contractual conflict.** Enquiry sent 2026-11-20
+18:11 UTC (ticket 79ERJ8); first substantive reply 2026-11-21 16:03 UTC;
+narrowed three-question follow-up 2026-11-22 01:00 UTC; **second substantive
+reply 2026-11-24 20:43 UTC**, from *"Dex, the Community Success Lead from
+Discord"*. All three follow-up questions were answered. **No contractual
+clause was cited in any of the three replies.** The enquiry is **closed**, and
+no further round is warranted: the unresolved issue is a conflict between the
+firm's stated operational practice and its own Terms, not a question another
+support message would settle.
+
+**The5ers was ranked ahead of every other firm screened for one reason:**
+Terms §11.1 appeared to offer written approval before money is committed.
+Support has now stated twice in its second reply, in response to the direct
+follow-up, that it does not — *"We do not provide a pre-trading review or
+approval of individual EAs or strategies."* The requirement that made the firm
+worth selecting therefore has no available route.
+
+**The5ers is not equivalent to an outright EA prohibition**, and must not be
+recorded as one. Equity Edge prohibits automated trading. The5ers permits
+self-owned automation in principle, and fails instead because the contractual
+prior-approval precondition has no pre-trading approval mechanism behind it.
+Different grounds, same disqualifying consequence for a route that depends on
+advance clearance.
+
 ### 1a — Automation has three levels, and a firm can pass one while failing another
 
 | Level | What to confirm in writing |
@@ -120,6 +145,64 @@ This is a single firm's terms, surveyed once. It is useful for judging whether
 another firm's offer is better or worse *than Equity Edge's*, and for nothing
 more. It has not been checked against any sample of the sector and must not be
 cited as what the industry typically offers.
+
+### Verification record — The5ers (Five Percent Online LTD)
+
+| | |
+|---|---|
+| Enquiry sent | 2026-11-20 18:11 UTC, `help@the5ers.com`, five numbered questions, each asking for the governing clause |
+| Auto-acknowledgement | 2026-11-20 18:11 UTC, ticket **79ERJ8**, *"We respond to your requests up to 2 business days"*; office hours Sunday–Thursday and Friday, 08:00–17:00 CET |
+| Escalation notice | 2026-11-21 09:19 UTC — *"escalating your request to the relevant team for further investigation and review"* |
+| First substantive reply | 2026-11-21 16:03 UTC. Answered **one of five** — tool permission, in general terms |
+| Confirmed, verbatim | *"We generally permit the use of Expert Advisors (EAs) on our accounts."* |
+| Confirmed, verbatim | *"However, for any other complicated type of EA, you need to own the source code."* |
+| Prohibited EA functions listed | third-party signal copying; tick scalping; latency arbitrage; reverse arbitrage; hedge arbitrage; high-frequency trading — plus a link to the Prohibited Trading Practices FAQ |
+| Follow-up sent | 2026-11-22 01:00 UTC — three questions: mandatory prior approval under §11.1, payout eligibility, protection against later reversal |
+| Stated window | Lapsed **before** the reply arrived. The follow-up reached them 02:00 CET Sunday 2026-11-22, a working day; on the latest admissible counting the two-business-day window closed 17:00 CET Tuesday 2026-11-24 = 16:00 UTC. The reply came 4 h 44 m after that |
+| **Second substantive reply** | **2026-11-24 20:43 UTC**, from **"Dex, the Community Success Lead from Discord"**. **All three follow-up questions answered** |
+| Confirmed, verbatim — framing | *"As a prop firm, we cannot advise on, approve, or evaluate individual trading strategies, custom lot-sizing methods, or specific position setups prior to trading."* |
+| Confirmed, verbatim — tool | *"EAs and automated tools can be used if you own the EA and its full source code. Based on what you described (a self-developed EA with full source code ownership), this falls within what is permitted. We do not provide a pre-trading review or approval of individual EAs or strategies."* |
+| Confirmed, verbatim — payout | *"Profits generated with a permitted EA are treated the same as any other trading profits. They remain eligible for Performance Rewards and withdrawal, as long as all trading rules and prohibited trading practices are observed."* |
+| Confirmed, verbatim — later review | *"Since we do not pre-approve individual strategies, all trading activity, whether manual or automated, is assessed against our Terms and trading rules. As long as your EA's actual trading behavior stays within those rules, it is treated like any other compliant trading."* |
+| Clauses cited | **None**, for any answer, across all three replies. §11.1 was never addressed |
+| Outstanding | **None — enquiry closed 2026-11-24. No further round warranted** |
+
+#### The5ers against 1a's three levels
+
+| Level | Status | Reason |
+|---|---|---|
+| **Tool** | **Not cleared** | Self-developed EAs with full source ownership are confirmed permitted **in principle**, and confirmed against the disclosed EA specifically. But §11.1(a) requires written Company approval **prior to** use, at sole discretion under 11.1(b), while support states expressly that it provides no pre-trading approval. The contractual conflict is unresolved |
+| **Behaviour** | **Not cleared** | The firm expressly declines to review individual strategies or trading behaviour before trading. The disclosed profile — GBP/JPY, 15-minute signals, roughly 35 trades per month, roughly 25-pip stops, positions held for hours — has received **no advance assessment** against the prohibited practices. Assessment is retrospective only |
+| **Payout** | **Conditionally confirmed; not cleared for this deployment** | Profits from a *permitted* EA are confirmed eligible for Performance Rewards and withdrawal, provided all trading rules are observed. This is a genuine improvement on the position before 2026-11-24 and is recorded as such. But the condition is that the EA **is** permitted, and that remains unresolved under the tool row above |
+
+**The §11.1 conflict, recorded precisely.** The firm has stated that EAs may be
+used where the user owns the EA and its full source code, and that it does not
+provide pre-trading approval of individual EAs. §11.1(a) requires written
+approval **before** using Automated Trading Software. These positions are
+**not reconciled**, and no clause was cited to reconcile them.
+
+**How not to over-read this.** §18.6 establishes the Terms' priority over
+*website content*; a support email is not necessarily website content, so
+§18.6 must not be claimed to settle that email's status. The narrower and
+stronger point is that **the email does not amend §11.1, and does not itself
+constitute the prior approval that §11.1 requires.** The sender's position —
+Community Success Lead, Discord — bears on the email's contractual authority,
+consistent with this spec's standing rule that a representative's reassurance
+does not override contradictory contractual terms.
+
+**Advance clearance — the finding that matters.** Section B treats the absence
+of advance clearance as a material defect rather than an administrative
+detail. The5ers' §11.1 looked like the only advance-clearance route found in
+the sector, and was the sole reason the firm ranked first. The firm has now
+confirmed in writing that no such route operates. **Recorded as unavailable
+according to support. The5ers does not clear Question 1.**
+
+**Two firms screened, two failing the decisive requirement, on different
+grounds.** Equity Edge prohibits automated trading outright. The5ers permits
+self-owned automation in principle but offers no pre-trading approval against
+a Terms provision that requires it. This is accumulating into a finding about
+the **route** rather than about either firm — see "What this spec is not"
+below.
 
 ## B — Counterparty risk
 
