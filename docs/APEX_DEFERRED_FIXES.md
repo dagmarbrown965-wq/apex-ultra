@@ -54,6 +54,11 @@ rather than from the docstring.
 a **10.413-day** span from a single request — one request window is the minimum
 fetch granularity, which is precisely what the old line obscured.
 
+**Partially discharged only — see N13 (2026-11-24).** The docstring was
+corrected, but three instances of the superseded 1000-candle claim survive
+elsewhere in the same file, one of them in an artifact that outlives the run.
+D1 should not be read as closed.
+
 ---
 
 # CONFIRMED ABSENT — both investigated and resolved 2026-11-16
@@ -326,6 +331,76 @@ and it would have caught v0.6 in August.
 
 ---
 
+# NEW — raised in the 2026-11-24 session
+
+Raised while reading `tools/fetch_candles.py` in full for the first time,
+during Phase 50 Route 4 Session 1. All three are **documentation or validation
+findings only.** The tool is **frozen** under the Route 4 acquisition
+agreement and none of these authorises a change to it.
+
+## N13. D1 is recorded as FIXED, but only the docstring was corrected
+
+The docstring now states correctly that `count` is a time window. Three
+instances of the superseded claim remain in the same file:
+
+| Instance | Location | Outlives the run? |
+|---|---|---|
+| `CANDLES_PER_REQUEST = 1000` with the comment `# observed server cap` | the constant | no |
+| `per request   : 1000 candles` | the run banner | printed only |
+| `"candles_per_request": 1000` | the summary JSON | **yes** |
+
+The third is the one that matters: it is written into every summary artifact,
+including any future sealed dataset, under a key whose name asserts a cap that
+does not exist.
+
+**This is also a record finding.** D1's entry above reads **FIXED**, and was
+closed on the strength of the docstring alone. Same family as N12 — a document
+asserting more than the filesystem supports.
+
+**Fix:** documentation and a field rename, no behavioural change. Needs its
+own short plan, deliberately not bundled with anything else, per N11's
+reasoning.
+
+## N14. Nothing validates epoch alignment to the granularity grid
+
+`tools/fetch_candles.py` computes `gaps_over_granularity_count` — intervals
+**larger** than the granularity — but nothing tests `epoch % GRANULARITY`. An
+off-grid timestamp passes through silently into both the `.jsonl` and the
+summary.
+
+**This has already happened, in sealed data.** D2's first epoch is
+`1786039197`, three seconds short of `1786039200` — **897 s off the
+900-second boundary**. It entered the D2 seal without the tool noticing. The
+seal records the offset at lines 100–101, so the fact is preserved, but it was
+caught by hand rather than by the tool.
+
+**Consequence beyond the record.** Phase 50's Route 4 agreement requires X's
+grid and open/close timestamp convention to be **established from data rather
+than assumed**, and both of its acquisition-boundary intervals are explicitly
+conditional on that convention. This item is the evidential basis for that
+conditionality: a tool that never validated the grid for the instrument it was
+built for will not validate it for a new one.
+
+**Not a fix to the frozen tool.** Recorded so that any replacement acquisition
+tooling carries the check from the start.
+
+## N15. `MAX_CONSECUTIVE_EMPTY = 4` is a thin margin against a holiday closure
+
+On an empty response the loop steps back `WEEKEND_STEP_SECONDS = 86400` — one
+day — and aborts after four consecutive empties as
+`history_exhausted_consecutive_empty`.
+
+A normal forex weekend costs two or three empties. A long holiday closure can
+reach four, at which point the run stops with a `stop_reason` that **reads
+like a history boundary but would be a calendar artifact**. The delivered span
+would be short and the cause misattributed.
+
+**Recorded as a risk, not a change.** The retry policy is not to be adjusted
+without separate justification and review: altering it changes fetch
+behaviour, and the tool is frozen.
+
+---
+
 # INCIDENT
 
 ## I1. Phase 46 dataset deleted by a wildcard, 2026-11-16
@@ -467,3 +542,10 @@ intentional: the backup benefits from sync, the repo does not.
   `Test-Path`; N1–N9 raised during the D2 acquisition session; E1 partially
   mitigated by verified copies; the lock commit date verified from `git log`
   rather than inherited from the record.
+* **2026-11-24** — `tools/fetch_candles.py` read in full for the first time,
+  during Phase 50 Route 4 Session 1. N13–N15 raised, and D1's closure found to
+  be partial. The reading also established that the tool **cannot express a
+  bounded historical request** — it anchors at `latest` and walks backwards,
+  with no caller-settable window — which is why Route 4's acquisition path
+  must be a different mechanism and the tool is now frozen. That finding lives
+  in the Route 4 agreement, not here.
