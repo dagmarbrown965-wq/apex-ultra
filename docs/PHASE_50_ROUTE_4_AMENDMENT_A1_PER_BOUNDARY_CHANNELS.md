@@ -2,7 +2,25 @@
 
 ## Per-boundary channel enumeration, replacing §7.6's global two-channel declaration
 
-**Status: PROPOSED. Not adopted. Not approved.**
+## STATUS: WITHDRAWN — 2026-11-25
+
+**This amendment is withdrawn, not shelved**, per its own §5 and the decision
+recorded in `PHASE_50_ROUTE_4_G0A_DECISION_ISOLATION_SEARCH_CLOSED.md`.
+
+The three-process architecture it exists to serve was **rejected** on the
+available evidence and the bounded-scope rule: T1 failed leg L1 completely,
+and T3 was predicted to fail at four Users-group-granted locations without
+machine-wide ACL changes that fall outside the agreed bound. **T3 was not
+run.**
+
+**Consequence: agreement v8 §7.6's global two-channel declaration stands
+unamended.** No change to the G0-approved agreement is required. The text
+below is retained as the record of what was proposed and why, and must not be
+read as a live proposal.
+
+---
+
+**Status when raised: PROPOSED. Not adopted. Not approved.**
 Raised 2026-11-25. Conditional on the §6 Windows isolation test returning
 positive — if it fails, the two-process baseline stands and this amendment is
 **withdrawn, not shelved**.
